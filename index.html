@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Free Local AI Models for Motion Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f4; --bg2:#f1ede4; --card:#ffffff; --card2:#f7f4ec;
+  --ink:#1c1a16; --ink2:#4c463c; --ink3:#857d6d;
+  --line:#e3dccb; --line2:#d4cbb2;
+  --accent:#c2410c; --accent-soft:#fdeadd; --accent-ink:#9a3407;
+  --teal:#0f766e; --teal-soft:#d9f0ec;
+  --amber:#b45309; --amber-soft:#fdf0d5;
+  --red:#b3261e; --red-soft:#fbe7e5;
+  --green:#166534; --green-soft:#dcf2e0;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:'Hind Siliguri',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#141311; --bg2:#1b1a17; --card:#201f1c; --card2:#26241f;
+    --ink:#f0ebe0; --ink2:#c9c2b2; --ink3:#98917f;
+    --line:#35322b; --line2:#454139;
+    --accent:#fb7c3c; --accent-soft:#3a2417; --accent-ink:#ffb287;
+    --teal:#2dd4bf; --teal-soft:#123330;
+    --amber:#fbbf24; --amber-soft:#33270c;
+    --red:#f87171; --red-soft:#3a1714;
+    --green:#4ade80; --green-soft:#122b1a;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 80px}
+.mono{font-family:var(--mono)}
+
+/* ---------- header / hero ---------- */
+header{padding:44px 0 8px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+h1{font-size:clamp(30px,5.4vw,50px);line-height:1.12;font-weight:700;margin:0 0 14px;letter-spacing:-.01em}
+h1 .hl{color:var(--accent)}
+.lede{font-size:clamp(16px,2.4vw,19px);color:var(--ink2);max-width:760px;margin:0 0 26px}
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat b{display:block;font-size:24px;line-height:1.1;font-weight:700}
+.stat span{font-size:13px;color:var(--ink3)}
+.note-bar{margin-top:16px;background:var(--amber-soft);border:1px solid var(--line);border-radius:10px;padding:13px 16px;font-size:14.5px;color:var(--ink)}
+.note-bar b{color:var(--amber)}
+
+/* ---------- sticky nav ---------- */
+nav.toc{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);margin:26px -20px 0;padding:10px 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav.toc::-webkit-scrollbar{display:none}
+nav.toc a{white-space:nowrap;font-size:13.5px;font-weight:600;color:var(--ink2);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+nav.toc a:hover{color:var(--accent);text-decoration:none;border-color:var(--accent)}
+
+/* ---------- sections ---------- */
+section{padding:38px 0 6px}
+.sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.sec-num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);border:1.5px solid var(--accent);border-radius:8px;padding:2px 9px}
+h2{font-size:clamp(23px,3.6vw,31px);margin:0;line-height:1.25;font-weight:700}
+.sec-sub{color:var(--ink2);max-width:780px;margin:6px 0 18px}
+h3{font-size:19px;margin:26px 0 10px;font-weight:700}
+
+/* pick card */
+.pick{display:grid;grid-template-columns:1fr;gap:0;background:var(--card);border:2px solid var(--accent);border-radius:14px;overflow:hidden;margin:14px 0 18px}
+@media(min-width:760px){.pick{grid-template-columns:1.15fr .85fr}}
+.pick-main{padding:20px 22px}
+.pick-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:3px 10px;border-radius:999px;margin-bottom:10px}
+@media (prefers-color-scheme: dark){.pick-tag{color:#1c1005}}
+.pick-main h3{margin:0 0 6px;font-size:24px}
+.pick-main p{margin:0;color:var(--ink2);font-size:15.5px}
+.pick-side{background:var(--card2);border-top:1px solid var(--line);padding:18px 22px;font-size:14px}
+@media(min-width:760px){.pick-side{border-top:none;border-left:1px solid var(--line)}}
+.pick-side dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:5px 14px}
+.pick-side dt{color:var(--ink3);font-weight:600}
+.pick-side dd{margin:0;font-weight:600}
+
+/* badges */
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;vertical-align:middle;white-space:nowrap}
+.b-ok{background:var(--green-soft);color:var(--green)}
+.b-warn{background:var(--amber-soft);color:var(--amber)}
+.b-no{background:var(--red-soft);color:var(--red)}
+.b-info{background:var(--teal-soft);color:var(--teal)}
+
+/* model cards (mobile-first, table on desktop) */
+table.models{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14.5px}
+table.models th{background:var(--bg2);text-align:left;padding:10px 14px;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);border-bottom:1px solid var(--line)}
+table.models td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+table.models tr:last-child td{border-bottom:none}
+table.models td.name{font-weight:700;min-width:150px}
+table.models td.name small{display:block;font-weight:400;color:var(--ink3);font-size:12.5px;margin-top:2px}
+.cmd{font-family:var(--mono);font-size:12px;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:1px 7px;white-space:nowrap}
+@media(max-width:760px){
+  table.models,table.models tbody,table.models tr,table.models td{display:block;width:100%}
+  table.models thead{display:none}
+  table.models tr{border-bottom:2px solid var(--line2);padding:6px 0}
+  table.models td{border-bottom:none;padding:5px 14px}
+  table.models td.name{padding-top:10px;font-size:16px}
+  table.models td::before{content:attr(data-l);display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:700}
+  table.models td.name::before{display:none}
+}
+
+/* generic cards grid */
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:680px){.grid.c2{grid-template-columns:1fr 1fr}.grid.c3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.card h3,.card h4{margin:0 0 6px;font-size:17px}
+.card p{margin:0;color:var(--ink2);font-size:14.5px}
+.card p+p{margin-top:8px}
+.card .big{font-size:22px;font-weight:700}
+
+/* hardware selector */
+.hw-btns{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.hw-btn{font-family:var(--sans);font-size:15px;font-weight:600;padding:10px 18px;border-radius:10px;border:1.5px solid var(--line2);background:var(--card);color:var(--ink);cursor:pointer}
+.hw-btn[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-ink)}
+.hw-panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.hw-panel h3{margin-top:0}
+.hw-panel ul{margin:8px 0 0;padding-left:20px}
+.hw-panel li{margin:4px 0}
+.sweet{border-color:var(--accent)}
+
+/* pipeline flow */
+.flow{display:flex;flex-direction:column;gap:0;margin:16px 0}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step-dot{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px}
+@media (prefers-color-scheme: dark){.step-dot{color:#1c1005}}
+.step-body{padding-bottom:20px;border-left:2px dashed var(--line2);margin-left:-31px;padding-left:45px}
+.step:last-child .step-body{border-left:none}
+.step-body b{font-size:16.5px}
+.step-body p{margin:2px 0 0;color:var(--ink2);font-size:14.5px}
+
+/* trap / alert boxes */
+.trap{background:var(--red-soft);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:10px 0}
+.trap b{color:var(--red)}
+.warnbox{background:var(--amber-soft);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0;font-size:15px}
+.warnbox b{color:var(--amber)}
+.okbox{background:var(--teal-soft);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0;font-size:15px}
+
+/* lists */
+ul.tight{margin:8px 0;padding-left:20px}
+ul.tight li{margin:5px 0}
+.small{font-size:13.5px;color:var(--ink3)}
+.src{font-size:12.5px;color:var(--ink3)}
+footer{margin-top:50px;border-top:1px solid var(--line);padding-top:22px}
+footer h3{margin-top:0}
+.src-list{columns:1;font-size:13.5px;color:var(--ink2);padding-left:18px}
+@media(min-width:760px){.src-list{columns:2}}
+.src-list li{margin:4px 0;break-inside:avoid}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kicker">Market Research · Late 2025 – 5 Nov 2026 · Local-First Edition</p>
+  <h1>ফ্রি <span class="hl">Local AI Models</span> — Motion Design-এর পুরো পাইপলাইনের জন্য</h1>
+  <p class="lede">Content idea ও story থেকে voice, storyboard আর final video — প্রতিটা স্টেজে এখন কোন <strong>ফ্রি, নিজের PC-তে রান হওয়া</strong> মডেলটা সবচেয়ে ভালো কাজ করবে, কোনটা commercial client work-এ legally safe, আর কোনটায় কত VRAM লাগবে — সব এক জায়গায়। Cloud এখানে শুধু fallback হিসেবে brief-এ আছে।</p>
+  <div class="hero-stats">
+    <div class="stat"><b>$0</b><span>পুরো local stack-এর software cost</span></div>
+    <div class="stat"><b>5</b><span>পাইপলাইন স্টেজ — idea → final output</span></div>
+    <div class="stat"><b>8–64 + 8–24 GB</b><span>RAM ও VRAM — দুটো tier selector-ই নিচে Hardware-তে</span></div>
+    <div class="stat"><b>⚠️ বাংলা</b><span>Local VO-তে এখনো দুর্বল — নিচে বিস্তারিত</span></div>
+  </div>
+  <div class="note-bar"><b>সবচেয়ে জরুরি সত্যটা আগে:</b> Local মডেলে <strong>ভালো বাংলা voiceover এখনো নেই</strong> (2026)। English VO লোকালেই final-quality সম্ভব, কিন্তু বাংলা final VO-র জন্য cloud বা আসল মানুষের voice লাগবে — বিস্তারিত Stage 2-তে। আরেকটা trap: <strong>code-এর licence আর weights-এর licence এক নয়</strong> — "open-source" মানেই commercial use allowed না।</div>
+</header>
+
+<nav class="toc" aria-label="বিভাগসমূহ">
+  <a href="#hardware">🖥️ Hardware Tier</a>
+  <a href="#runners">Runner সফটওয়্যার</a>
+  <a href="#stage1">1 · Idea &amp; Script</a>
+  <a href="#stage2">2 · Voice / TTS</a>
+  <a href="#stage3">3 · Storyboard</a>
+  <a href="#stage4">4 · Video / Final</a>
+  <a href="#stage5">5 · Social Posts</a>
+  <a href="#pipeline">Full Pipeline</a>
+  <a href="#traps">Licence Traps</a>
+  <a href="#cloud">Cloud Fallback</a>
+</nav>
+
+<!-- ============ HARDWARE ============ -->
+<section id="hardware">
+  <div class="sec-head"><span class="sec-num">RAM + VRAM</span><h2>তোমার RAM আর VRAM অনুযায়ী কোনটা চলবে?</h2></div>
+  <p class="sec-sub">এবার <strong>দুটো আলাদা selector</strong> — উপরে system RAM (8 / 16 / 32 / 64 GB), নিচে GPU VRAM (8 / 12 / 16 / 24 GB), ঠিক RAM-এর মতোই। দুটো মিলিয়ে দেখো, কারণ দুটো আলাদা জিনিস: RAM ঠিক করে কত বড় মডেল load হবে, offload কতটা smooth হবে, আর LM Studio + ComfyUI + Premiere একসঙ্গে খোলা যাবে কিনা; image/video মডেলের আসল gate হলো GPU-র VRAM। Research-এর ভাষায় GPU কিনতে হলে এখনো <strong>24 GB VRAM</strong> (RTX 3090 / 4090)-ই sweet spot, আর RAM-এর sweet spot হলো <strong>32 GB</strong>।</p>
+  <h3 style="margin-top:18px">System RAM সিলেক্ট করো</h3>
+  <div class="hw-btns" role="group" aria-label="RAM tier বেছে নাও">
+    <button class="hw-btn ram-btn" data-tier="r8" aria-pressed="false">8 GB RAM</button>
+    <button class="hw-btn ram-btn" data-tier="r16" aria-pressed="false">16 GB RAM</button>
+    <button class="hw-btn ram-btn" data-tier="r32" aria-pressed="true">32 GB RAM ⭐</button>
+    <button class="hw-btn ram-btn" data-tier="r64" aria-pressed="false">64 GB RAM</button>
+  </div>
+
+  <div class="hw-panel" id="panel-r8" hidden>
+    <h3>8 GB RAM — Minimum-এর নিচে · শুধু draft / timing-এর কাজ</h3>
+    <p style="margin:0 0 6px;color:var(--ink2);font-size:14.5px"><b style="color:var(--red)">সত্যি কথা:</b> LM Studio-র নিজের recommended minimum-ই 16 GB RAM / 4 GB VRAM — 8 GB তার নিচে। পুরো pipeline এই tier-এ smooth চলবে না; যেটা চলবে, সেটাই নিচে।</p>
+    <ul>
+      <li><b>Script:</b> Llama 3.2 3B / সবচেয়ে ছোট Qwen–Gemma (download 2–3 GB, যেকোনো laptop-এ, CPU-তেও সম্ভব) — শুধু ideation on the go। Qwen3-8B (5.2 GB)-ও RAM headroom-এ আটকাবে, swap হয়ে ধীর হবে</li>
+      <li><b>Voice: ✅ এই tier-এ একমাত্র stage যা পুরোপুরি চলে</b> — Kokoro-82M (~327 MB, CPU-তেই real-time থেকে fast) আর Piper (প্রতি voice &lt;100 MB, CPU / Raspberry Pi class) — Bangla timing draft-এর <span class="cmd">bn_BD-google-medium</span>-সহ</li>
+      <li><b>Image:</b> আলাদা GPU থাকলে SDXL (6–8 GB VRAM) কোনোমতে, বাকি সব app বন্ধ করে। Qwen-Image / FLUX-এর বড় quant এই RAM-এ practical না</li>
+      <li><b>Video: ❌ practical না</b> — Wan 2.2-র recommended RAM-ই 32 GB। বড়জোর CogVideoX-2B INT8 (3.6 GB VRAM) দিয়ে low-res previz try করা যায়, ধীরে</li>
+      <li><b>Verdict:</b> Voice + ছোট LLM দিয়ে শুরু করা যায়, কিন্তু কাজের machine হিসেবে প্রথম upgrade-টাই RAM — অন্তত 16 GB, পারলে সরাসরি 32 GB</li>
+    </ul>
+  </div>
+  <div class="hw-panel" id="panel-r16" hidden>
+    <h3>16 GB RAM — Entry tier · ছোট মডেলে পুরো pipeline সম্ভব</h3>
+    <ul>
+      <li><b>Script:</b> Qwen3-8B ⭐ — 5.2 GB download, ~5–6 GB VRAM / 8 GB card (16 GB RAM-এর Mac-এ চলার হিসাব research-এই আছে)। Ideation, title, caption variant-এ যথেষ্ট; script arc 14B থেকে দুর্বল। Mistral 7B (~4–5 GB)-ও চলে</li>
+      <li><b>Voice:</b> Kokoro / Piper CPU-তে, Chatterbox (~2–4 GB VRAM) GPU-তে — voice stage-এ RAM কোনো বাধাই না</li>
+      <li><b>Image:</b> FLUX.1-schnell GGUF Q4/Q5 (6–8 GB VRAM), SDXL (6–8 GB), Qwen-Image Q2–Q3 GGUF + Lightning LoRA (~8 GB tier)</li>
+      <li><b>Video:</b> Wan 2.2 TI2V-5B offload করে চলবে, কিন্তু এর recommended RAM 32 GB — তাই এই tier-এ ধীর / swap হবে। Draft-এর জন্য LTX-Video 0.9.x (~8 GB VRAM) তুলনায় practical</li>
+      <li><b>খেয়াল রাখো:</b> একবারে একটা app — LM Studio আর ComfyUI একসঙ্গে খুললেই 16 GB ভরে যাবে; Premiere/AE খোলার আগে একটা বন্ধ করো</li>
+    </ul>
+  </div>
+  <div class="hw-panel sweet" id="panel-r32">
+    <h3>32 GB RAM — Recommended ⭐ · পুরো pipeline-এর practical sweet spot</h3>
+    <ul>
+      <li><b>Script:</b> Qwen3-14B ⭐ — এই গাইডের #1 pick ঠিক এই হিসাবেই চলে: 12–16 GB VRAM + 32 GB RAM। Gemma 3 12B (12 GB tier)-ও comfortable</li>
+      <li><b>Voice:</b> সবগুলোই — Chatterbox, Kokoro, আর Qwen3-TTS 1.7B (~8 GB VRAM comfortable)-সহ</li>
+      <li><b>Image:</b> Qwen-Image Q4 GGUF (file ~12–13 GB, &lt;12 GB VRAM tier), FLUX GGUF Q5 — storyboard-এর আসল কাজের setup এটাই</li>
+      <li><b>Video:</b> Wan 2.2 A14B Q4 GGUF (&lt;12 GB VRAM claimed), HunyuanVideo 1.5 (14 GB VRAM floor, offload), LTX-2.5 int8/distilled path (~12 GB VRAM, unofficial — official minimum 32 GB VRAM / 32 GB RAM, যার RAM অংশটা এই tier পূরণ করে)</li>
+      <li><b>Verdict:</b> বেশিরভাগ motion designer-এর জন্য এটাই লক্ষ্য — 5টা stage-র সব #1 pick এক machine-এ চলে, budget-ও নিয়ন্ত্রণে থাকে</li>
+    </ul>
+  </div>
+  <div class="hw-panel" id="panel-r64" hidden>
+    <h3>64 GB RAM — Pro tier · বড় মডেল + সব app একসঙ্গে</h3>
+    <ul>
+      <li><b>Script:</b> Qwen3-32B (~20 GB, 24 GB VRAM-এ tight context) / Qwen3-30B-A3B (~19 GB, 20–24 GB VRAM) — hero script-এর final pass। Llama 3.3 70B Q4 (~43 GB)-এর হিসাব research-এ 48 GB+ VRAM (2×24 GB GPU) <em>অথবা</em> 64 GB+ Mac — মানে এই RAM tier-এ RAM/unified-memory offload পথটা খোলে, কিন্তু single consumer GPU-তে ভালো quality-তে চলবে ধরে নিও না</li>
+      <li><b>Voice:</b> সব TTS একসঙ্গে রাখা যায় — RAM এখানে কখনোই bottleneck না</li>
+      <li><b>Image:</b> Qwen-Image FP8/Q8 (16–24 GB VRAM) — full quality, বড় batch-এও swap-এর ভয় নেই</li>
+      <li><b>Video:</b> Wan 2.2 A14B FP8-তে 720p comfortable (24 GB VRAM থাকলে), HunyuanVideo 1.5 comfortable। LTX-2.x-এর official 32 GB RAM শর্ত সহজেই পূরণ হয় — তবে ওর 32 GB <em>VRAM</em> minimum আলাদা gate, RAM দিয়ে সেটা পূরণ হয় না</li>
+      <li><b>আসল সুবিধা:</b> LM Studio + ComfyUI + Premiere + After Effects <b>একসঙ্গে</b> খোলা যায়, বড় context আর offload-এর জন্য প্রচুর headroom — render/generation-এর মাঝে app বন্ধ করার ঝামেলা নেই</li>
+      <li><b>Caveat:</b> RAM বাড়ালেই VRAM বাড়ে না — 64 GB RAM-এর সঙ্গে 8 GB GPU থাকলে বড় video model-এ GGUF/offload-ই লাগবে, FP8 সরাসরি চলবে না</li>
+    </ul>
+  </div>
+  <p class="src">RAM/VRAM-এর সব সংখ্যা এই পেজের নিচের stage table গুলো থেকেই নেওয়া — LM Studio minimum (16 GB RAM / 4 GB VRAM), Qwen3-8B/14B/32B-র হিসাব, Wan 2.2-র 32 GB RAM recommendation, LTX-2.x-এর official minimum আর Llama 3.3 70B-র 64 GB+ Mac হিসাবসহ।</p>
+
+  <h3 style="margin-top:28px">GPU VRAM সিলেক্ট করো — RAM-এর মতোই</h3>
+  <p style="color:var(--ink2);font-size:15px;margin:4px 0 0">RAM যেভাবে সিলেক্ট করলে, VRAM-ও ঠিক সেভাবে সিলেক্ট করো। এই ৪টা হলো বাজারের আসল consumer GPU সাইজ: 8 GB (RTX 4060 / 3070 class), 12 GB (RTX 4070 / 3060 12 GB class), 16 GB (RTX 4070 Ti Super / 4080 class), 24 GB (RTX 3090 / 4090)। Image আর video মডেল চলবে কিনা, সেটা মূলত এই সংখ্যাটাই ঠিক করে।</p>
+  <div class="hw-btns" role="group" aria-label="VRAM tier বেছে নাও">
+    <button class="hw-btn vram-btn" data-vtier="v8" aria-pressed="false">8 GB VRAM</button>
+    <button class="hw-btn vram-btn" data-vtier="v12" aria-pressed="false">12 GB VRAM</button>
+    <button class="hw-btn vram-btn" data-vtier="v16" aria-pressed="false">16 GB VRAM</button>
+    <button class="hw-btn vram-btn" data-vtier="v24" aria-pressed="true">24 GB VRAM ⭐</button>
+  </div>
+
+  <div class="hw-panel" id="panel-v8" hidden>
+    <h3>8 GB VRAM — Entry GPU · ছোট / quantized মডেলে কাজ শুরু</h3>
+    <ul>
+      <li><b>Script:</b> Qwen3-8B ⭐ — 5.2 GB download, ~5–6 GB VRAM-এ আরামে চলে। Qwen3-14B (12–16 GB VRAM) এই tier-এ চলবে না</li>
+      <li><b>Voice: ✅ পুরোপুরি চলে</b> — Kokoro-82M CPU-তেই চলে, Chatterbox মাত্র ~2–4 GB VRAM, Piper CPU-তে। Qwen3-TTS 1.7B (~8 GB VRAM comfortable) একদম borderline / tight হবে</li>
+      <li><b>Image:</b> FLUX.1-schnell GGUF Q4/Q5 (6–8 GB) ⭐ আর SDXL (6–8 GB) — এই tier-এর আসল কাজের setup। Qwen-Image শুধু Q2–Q3 GGUF (~8 GB tier)-এ, quality কমিয়ে</li>
+      <li><b>Video:</b> Wan 2.2 TI2V-5B ⭐ — offload দিয়ে ~8 GB VRAM-এ 720p @ 24fps, ~5s clip। Draft-এর জন্য LTX-Video 0.9.x (~8 GB), previz-এর জন্য Wan 2.1 1.3B (8.19 GB) বা CogVideoX-2B INT8 (3.6 GB)</li>
+      <li><b>চলবে না:</b> Wan 2.2 A14B FP8, HunyuanVideo 1.5 (14 GB floor), LTX-2.x official (32 GB VRAM minimum), Qwen-Image FP8</li>
+      <li><b>Verdict:</b> Storyboard + draft video পর্যন্ত ঠিক আছে; quality video-র জন্য প্রতিটা বড় মডেলে GGUF quant + offload লাগবে, আর RAM অন্তত 16 GB (ভালো হয় 32 GB) না হলে offload-এ আটকাবে</li>
+    </ul>
+  </div>
+  <div class="hw-panel" id="panel-v12" hidden>
+    <h3>12 GB VRAM — Balanced tier · Qwen-Image আর Wan A14B-র quant পথ খোলে</h3>
+    <ul>
+      <li><b>Script:</b> Qwen3-14B-র নিচের সীমা (12–16 GB VRAM) — 12 GB-তে tight context-এ কোনোমতে, comfortable না। Gemma 3 12B ঠিক এই 12 GB tier-এর মডেল। নিরাপদ default থাকবে Qwen3-8B</li>
+      <li><b>Voice:</b> সবগুলোই comfortable — Qwen3-TTS 1.7B (~8 GB VRAM)-সহ</li>
+      <li><b>Image:</b> Qwen-Image Q4 GGUF ⭐ — file ~12–13 GB, &lt;12 GB VRAM tier-এ চলে, এটাই এই tier-এর সবচেয়ে বড় আপগ্রেড। FLUX.1-schnell FP8 (~12 GB), SD 3.5 Large (~12 GB FP8)-ও চলে</li>
+      <li><b>Video:</b> Wan 2.2 A14B Q4 GGUF (&lt;12 GB VRAM claimed) ⭐, LTX-2.5-এর community int8/distilled path (~12 GB VRAM, unofficial — official minimum 32 GB VRAM)। HunyuanVideo 1.5-এর 14 GB floor এখনো পার হয় না</li>
+      <li><b>Verdict:</b> বাজেটে সবচেয়ে sensible মাঝামাঝি — storyboard-এর #1 pick (Qwen-Image) আর video-র #1 pick-এর quant ভার্সন (Wan A14B) দুটোই এই tier-এ প্রথমবার একসঙ্গে পাওয়া যায়</li>
+    </ul>
+  </div>
+  <div class="hw-panel" id="panel-v16" hidden>
+    <h3>16 GB VRAM — Comfortable tier · #1 LLM pick ঠিকঠাক চলে</h3>
+    <ul>
+      <li><b>Script:</b> Qwen3-14B ⭐ — এই গাইডের #1 pick (12–16 GB VRAM) এই tier-এ comfortable। Mistral Small 3 / 3.2 24B-ও ঠিক এই 16 GB VRAM tier-এর</li>
+      <li><b>Voice:</b> সব TTS-এ প্রচুর headroom — VRAM এখানে voice-এর জন্য কোনো হিসাবই না</li>
+      <li><b>Image:</b> Qwen-Image FP8-এর নিচের সীমা (16–24 GB VRAM) শুরু হয় এখান থেকে, Q4 GGUF তো আছেই। FLUX.1 [dev] FP8 (12–16 GB) চলে — তবে ওটা non-commercial, client work-এ schnell-ই ব্যবহার করো</li>
+      <li><b>Video:</b> HunyuanVideo 1.5-এর 14 GB floor পার হয় — offload দিয়ে চলবে (comfortable হলো 24 GB)। Wan 2.2 A14B Q5 GGUF (12–24 GB range)-ও এই tier-এ</li>
+      <li><b>Verdict:</b> বেশিরভাগ #1 pick quant ছাড়াই বা হালকা quant-এ চলে; শুধু সবচেয়ে বড় ভার্সনগুলোর (Qwen3-32B, Wan A14B FP8) জন্য 24 GB লাগবে</li>
+    </ul>
+  </div>
+  <div class="hw-panel sweet" id="panel-v24">
+    <h3>24 GB VRAM — Sweet Spot ⭐ · RTX 3090 / 4090 · সব #1 pick একসঙ্গে</h3>
+    <ul>
+      <li><b>Script:</b> Qwen3-32B (~20 GB file, 24 GB VRAM-এ tight context) আর Qwen3-30B-A3B (~19 GB, 20–24 GB VRAM) — local-এ cloud mid-tier-এর সবচেয়ে কাছের লেখা এই tier-এই পাওয়া যায়</li>
+      <li><b>Voice:</b> সবগুলোই — একসঙ্গে একাধিক TTS রাখলেও VRAM ফুরাবে না</li>
+      <li><b>Image:</b> Qwen-Image FP8 (16–24 GB VRAM) full quality ⭐, FLUX.1 [dev] BF16 (24 GB) পর্যন্ত চলে (licence trap মাথায় রেখে — client work-এ schnell)</li>
+      <li><b>Video:</b> Wan 2.2 A14B FP8-তে 720p comfortable ⭐, HunyuanVideo 1.5 comfortable (24 GB)। A14B-র Q8 GGUF-ও এই tier থেকে শুরু (24 GB+)</li>
+      <li><b>তবু চলবে না:</b> LTX-2.x-এর official minimum 32 GB VRAM, HunyuanVideo original 13B (45–60 GB), Llama 3.3 70B-র ভালো quality (48 GB+ VRAM / 2× GPU) — এগুলো 24 GB-র উপরের গল্প</li>
+      <li><b>Verdict:</b> Research-এর recommended কেনা — এই একটা কার্ডে পুরো pipeline-এর সব #1 pick চলে। সঙ্গে RAM 32 GB রাখলেই setup সম্পূর্ণ</li>
+    </ul>
+  </div>
+  <p class="src">VRAM-এর সব সংখ্যা নিচের stage table গুলো থেকেই: Qwen3-8B (~5–6 GB), Qwen3-14B (12–16 GB), Qwen3-32B / 30B-A3B (20–24 GB), Qwen-Image GGUF/FP8 tier, FLUX.1-schnell (6–8 GB), SDXL (6–8 GB), Wan 2.2 5B (~8 GB) ও A14B (FP8 24 GB / Q4 &lt;12 GB), HunyuanVideo 1.5 (14 GB floor / 24 GB comfortable), LTX-2.x official minimum (32 GB VRAM)।</p>
+</section>
+
+<!-- ============ RUNNERS ============ -->
+<section id="runners">
+  <div class="sec-head"><span class="sec-num">SETUP</span><h2>আগে এই ৩টা Runner ইন্সটল করো</h2></div>
+  <p class="sec-sub">মডেলগুলো সরাসরি চলে না — runner লাগে। Non-coder designer হিসেবে সবচেয়ে সহজ পথ: Pinokio দিয়ে ComfyUI ইন্সটল, LM Studio দিয়ে LLM।</p>
+  <div class="grid c3">
+    <div class="card">
+      <h3>Pinokio — সেরা installer</h3>
+      <p>Free, MIT-licensed। ComfyUI, Ollama, Wan 2.1/2.2, HunyuanVideo, TTS apps — সব 1-click install। প্রতিটা app-এর Python/CUDA আলাদা রাখে, তাই install clash হয় না। Guidance: image-এর জন্য ~6 GB VRAM, video-র জন্য ~12 GB+; NVIDIA সবচেয়ে safe।</p>
+      <p>⚠️ Caveat: community-তে Windows/Mac install freeze-এর report আছে — convenience হিসেবে নাও, pro infrastructure হিসেবে না।</p>
+      <p class="src">Source: aixploria.com, thegtmdirectory.com</p>
+    </div>
+    <div class="card">
+      <h3>LM Studio — LLM-এর জন্য (GUI)</h3>
+      <p>Model browser + chat, terminal লাগে না। July 2025 থেকে commercial use-এর জন্যও free (app নিজে closed-source)। Minimum recommendation: 16 GB RAM / 4 GB VRAM।</p>
+      <p><b>Ollama</b> হলো বিকল্প — CLI + desktop app, <span class="cmd">ollama run qwen3:14b</span> এক command-এই মডেল চলে, OpenAI-compatible local API-ও দেয়। দুটোই ভেতরে llama.cpp/GGUF — hardware physics একই।</p>
+      <p class="src">Source: storagereview.com, guidetoartificialintelligence.com</p>
+    </div>
+    <div class="card">
+      <h3>ComfyUI — Image + Video-র একমাত্র runner</h3>
+      <p>Node-based, free/open-source। Image আর video মডেলের জন্য এটাই standard — Ollama/LM Studio-তে diffusion মডেল চলে না, ওটা আলাদা জগৎ। Manual Python/CUDA setup এড়াতে <b>Pinokio দিয়ে ইন্সটল করো</b>।</p>
+      <p>Storyboard frame (Stage 3) আর সেই frame animate করা (Stage 4) — দুটোই এখানে হবে।</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 1 ============ -->
+<section id="stage1">
+  <div class="sec-head"><span class="sec-num">STAGE 1</span><h2>Content Idea + Story / Script — Local LLM</h2></div>
+  <p class="sec-sub">60-second brand film-এর script মানে মাত্র ~130–160 spoken words — এটা <em>ছোট</em> task। একটা ভালো 14B local মডেল এখানে সত্যিই usable; cloud-এর সঙ্গে gap টা long-form coherence আর brand-voice polish-এ, 150-word script-এ না। Creative draft-এর workflow tip: temperature 0.9–1.1, আর client-facing hero film-এর final polish pass-টা cloud-এ রেখো।</p>
+
+  <div class="pick">
+    <div class="pick-main">
+      <span class="pick-tag">#1 Pick — Local / Free</span>
+      <h3>Qwen3-14B <span style="font-size:15px;color:var(--ink3)">· LM Studio-তে চালাও</span></h3>
+      <p>Strong instruction-following, ভালো structure ও hook, thinking mode off করে fast drafting যায়। Local LLM-গুলোর মধ্যে <b>বাংলায় সবচেয়ে ভালো</b> — Qwen3-32B-কে community notes-এ "surprisingly good" Bangla বলা হয়েছে। তবে সাবধান: বাংলা creative-writing-এর কোনো rigorous 2025–26 benchmark নেই, দাবিটা community notes + একটা fine-tuning study-র ওপর ভিত্তি করে। Commit করার আগে একটা আসল Bangla brief-এ Qwen3-14B vs Gemma 3 12B A/B test করে নাও।</p>
+    </div>
+    <div class="pick-side"><dl>
+      <dt>Licence</dt><dd>Apache 2.0 <span class="badge b-ok">✅ Commercial OK</span></dd>
+      <dt>Download</dt><dd>9.3 GB (Q4_K_M GGUF)</dd>
+      <dt>Hardware</dt><dd>12–16 GB VRAM · 32 GB RAM</dd>
+      <dt>Command</dt><dd><span class="cmd">ollama run qwen3:14b</span></dd>
+      <dt>Step-up</dt><dd>24 GB থাকলে Qwen3-30B-A3B / 32B</dd>
+    </dl></div>
+  </div>
+
+  <table class="models">
+    <thead><tr><th>Model</th><th>Licence → Commercial?</th><th>Size / VRAM</th><th>Creative Writing</th><th>বাংলা</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="name">Qwen3-14B ⭐<small>default pick</small></td>
+        <td data-l="Licence">Apache 2.0 — পুরো Qwen3 family <span class="badge b-ok">✅ Yes</span></td>
+        <td data-l="Size / VRAM">9.3 GB · 12–16 GB VRAM</td>
+        <td data-l="Writing">ভালো hook/structure; fast drafting যায়</td>
+        <td data-l="বাংলা">Local-দের মধ্যে সেরা (তবু imperfect)</td>
+      </tr>
+      <tr>
+        <td class="name">Qwen3-30B-A3B<small>MoE, মাত্র 3B active</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅ Yes</span></td>
+        <td data-l="Size / VRAM">~19 GB · 20–24 GB VRAM</td>
+        <td data-l="Writing">4090-তে ~25 tok/s reported — speed-for-quality সেরা; final script pass-এর জন্য 14B থেকে step-up</td>
+        <td data-l="বাংলা">Family advantage একই</td>
+      </tr>
+      <tr>
+        <td class="name">Qwen3-8B<small>low-VRAM option</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅ Yes</span></td>
+        <td data-l="Size / VRAM">5.2 GB · ~5–6 GB VRAM / 8 GB card</td>
+        <td data-l="Writing">Ideation list, title, caption variants-এ fine; script arc দুর্বল</td>
+        <td data-l="বাংলা">Usable, 14B/32B থেকে বেশি error</td>
+      </tr>
+      <tr>
+        <td class="name">Qwen3-32B<small>max quality, 1 GPU</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅ Yes</span></td>
+        <td data-l="Size / VRAM">~20 GB · 24 GB VRAM (tight context)</td>
+        <td data-l="Writing">Cloud mid-tier-এর সবচেয়ে কাছে (local-এ)</td>
+        <td data-l="বাংলা">এই list-এর মধ্যে সেরা বাংলা</td>
+      </tr>
+      <tr>
+        <td class="name">Qwen 2.5-14B / 32B-Instruct<small>older, battle-tested</small></td>
+        <td data-l="Licence">Apache 2.0 এই size-গুলোতে <span class="badge b-ok">✅ Yes</span> — ⚠️ Qwen2.5-72B-র licence আলাদা ছিল (100M-user clause), generalise করো না</td>
+        <td data-l="Size / VRAM">Qwen3 equivalents-এর কাছাকাছি</td>
+        <td data-l="Writing">বিশাল prompt/community ecosystem; reasoning একটু পুরনো</td>
+        <td data-l="বাংলা">Good multilingual (29+ langs claimed)</td>
+      </tr>
+      <tr>
+        <td class="name">Gemma 3 12B / 27B<small><span class="cmd">gemma3:12b</span> = 8.2 GB · Gemma 4 (2026) এসেছে</small></td>
+        <td data-l="Licence">Gemma 3: Gemma Terms <span class="badge b-warn">⚠️ Conditional</span> — commercial allowed, user cap নেই, তবে Prohibited Use Policy pass করতে হয়, gated download। Gemma 4 core: Apache 2.0 ✅ (Apr 2026 থেকে, per sources)</td>
+        <td data-l="Size / VRAM">12B: 12 GB tier · 27B: 24–32 GB</td>
+        <td data-l="Writing">2026 round-up-গুলোতে সেরা local "prose voice"; 12B-কে 16 GB-তে creative "Goldilocks" বলা হয়েছে। Multimodal — storyboard frame দেখে critique-ও করতে পারে</td>
+        <td data-l="বাংলা">Explicitly multilingual family (140-lang claim), তবে একটা Bengali fine-tuning study-তে Gemma-3-4B তিনটার মধ্যে সবচেয়ে কম score করেছে (80.25% F1 vs Llama-3.2-3B 92.23%) — আছে, কিন্তু leading না</td>
+      </tr>
+      <tr>
+        <td class="name">Mistral Small 3 / 3.2 24B<small><span class="cmd">mistral-small:24b</span></small></td>
+        <td data-l="Licence">Small 3 Instruct-2501 card: Apache 2.0 ✅ — ⚠️ কিছু secondary source কিছু Mistral build-কে "Research / Non-Production" বলে; <b>exact checkpoint card check করো</b></td>
+        <td data-l="Size / VRAM">~14–15 GB · 16 GB VRAM tier</td>
+        <td data-l="Writing">Clean, low-repetition prose; editing pass-এ ভালো; Gemma-র মতো "character" কম</td>
+        <td data-l="বাংলা">Weak-moderate — European language-এ শক্ত, Bengali strength না</td>
+      </tr>
+      <tr>
+        <td class="name">Mistral 7B / Nemo 12B</td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅ Yes</span></td>
+        <td data-l="Size / VRAM">7B: ~4–5 GB · Nemo 12B: ~7 GB / 12 GB tier</td>
+        <td data-l="Writing">প্রায় যেকোনো hardware-এ fast drafting; Nemo translation pick</td>
+        <td data-l="বাংলা">Poor-moderate</td>
+      </tr>
+      <tr>
+        <td class="name">Llama 3.3 70B</td>
+        <td data-l="Licence">Llama Community Licence <span class="badge b-warn">⚠️ Conditional</span> — 700M monthly active user-এর নিচে commercial OK, "Built with Llama" attribution + Acceptable Use Policy লাগে</td>
+        <td data-l="Size / VRAM">~43 GB Q4 · <b>48 GB+</b> (2×24 GB GPU বা 64 GB+ Mac) — single consumer GPU-তে ভালো quality-তে চলে না</td>
+        <td data-l="Writing">Hardware থাকলে excellent; তবে 2026 sources বলছে Meta open release থেকে সরে গেছে — 3.3 এখন legacy line</td>
+        <td data-l="বাংলা">Moderate — officially মাত্র 8টা supported language, Bengali তার মধ্যে নেই; cross-lingual transfer-এ চলে, error আশা করো</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="src">Sources: spheron.network, dexity.com, intelligibberish.com, induwara.lk, promptquorum.com</p>
+</section>
+
+<!-- ============ STAGE 2 ============ -->
+<section id="stage2">
+  <div class="sec-head"><span class="sec-num">STAGE 2</span><h2>Voice Generation / TTS — Local Models</h2></div>
+  <div class="warnbox"><b>⚠️ Critical headline:</b> 2026-এ <strong>ভালো local Bengali TTS কার্যত নেই</strong>। নিচের সব quality মডেল English/European/East-Asian (+ দুটোতে Hindi)। Plan টা এভাবে সাজাও: <b>English VO = local</b>, <b>Bangla final VO = cloud বা human voice</b>, Bangla timing/draft = Piper। তোমার বেশিরভাগ B2B কাজ English VO — সেখানে সমস্যা হবে না।</div>
+
+  <div class="pick">
+    <div class="pick-main">
+      <span class="pick-tag">#1 Pick — English Client VO</span>
+      <h3>Chatterbox Multilingual V3 <span style="font-size:15px;color:var(--ink3)">· Resemble AI · Pinokio 1-click</span></h3>
+      <p>Zero-shot voice cloning মাত্র ~5–10 second sample থেকে, exaggeration/emotion control, Turbo-তে <span class="cmd">[laugh]</span> <span class="cmd">[cough]</span>-এর মতো paralinguistic tag। Resemble-এর blind test-এ ~63–65% listener ElevenLabs-এর চেয়ে এটাকে prefer করেছে। Output-এ Perth watermark থাকে। ⚠️ এর PyTorch 2.6 pin-এ RTX 50-series (Blackwell) kernel নেই — Blackwell owner হলে torch upgrade বা CPU fallback লাগবে।</p>
+    </div>
+    <div class="pick-side"><dl>
+      <dt>Licence</dt><dd>MIT <span class="badge b-ok">✅ Commercial OK</span></dd>
+      <dt>Hardware</dt><dd>~2–4 GB VRAM (Turbo 350M: ~2–2.9 GB)</dd>
+      <dt>Languages</dt><dd>23 — Hindi, Arabic, Chinese, Spanish… <span class="badge b-no">❌ Bengali নেই</span></dd>
+      <dt>Install</dt><dd><span class="cmd">pip install chatterbox-tts</span></dd>
+    </dl></div>
+  </div>
+
+  <table class="models">
+    <thead><tr><th>Model</th><th>Licence → Commercial?</th><th>Hardware</th><th>Languages / বাংলা</th><th>Cloning / Emotion</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="name">Kokoro-82M ⭐<small>সবচেয়ে সহজ · speed/draft-এর #1</small></td>
+        <td data-l="Licence">Apache 2.0 (weights + code) <span class="badge b-ok">✅ Yes</span></td>
+        <td data-l="Hardware">82M params, ~327 MB — <b>CPU-তেই চলে</b>, real-time থেকে fast</td>
+        <td data-l="Languages">8: EN (US/UK), ES, FR, <b>Hindi</b>, IT, JP, PT, ZH — <span class="badge b-no">❌ Bengali নেই</span> (community Indic fork-এ Bengali beta, unofficial)</td>
+        <td data-l="Cloning">❌ Cloning নেই; 54টা preset voice, emotion সীমিত</td>
+      </tr>
+      <tr>
+        <td class="name">Chatterbox Multilingual V3 ⭐<small>0.5B · best cloning pick</small></td>
+        <td data-l="Licence">MIT <span class="badge b-ok">✅ Yes</span> (output watermarked)</td>
+        <td data-l="Hardware">~2–4 GB VRAM; CPU fallback ধীর</td>
+        <td data-l="Languages">23 (Hindi সহ) — <span class="badge b-no">❌ Bengali নেই</span> (repo থেকে verbatim verify করা)</td>
+        <td data-l="Cloning">✅ ~5–10 s থেকে zero-shot cloning + emotion control</td>
+      </tr>
+      <tr>
+        <td class="name">Qwen3-TTS 1.7B ⭐<small>সবচেয়ে নতুন (22 Jan 2026) · watch list</small></td>
+        <td data-l="Licence">Apache 2.0 (models + tokenizer) <span class="badge b-ok">✅ Yes</span></td>
+        <td data-l="Hardware">3.9 GB weights, ~8 GB VRAM comfortable (0.6B: 1.8 GB) — <b>CUDA-only</b>, official CPU/Apple Silicon path নেই</td>
+        <td data-l="Languages">10: ZH, EN, JP, KR, DE, FR, RU, PT, ES, IT — <span class="badge b-no">❌ Bengali নেই, Hindi-ও নেই</span></td>
+        <td data-l="Cloning">✅ মাত্র <b>3-second cloning</b> (Base); CustomVoice-এ 9 preset speaker + plain-language style instruction; VoiceDesign-এ text description থেকে voice</td>
+      </tr>
+      <tr>
+        <td class="name">Piper ⭐<small>একমাত্র local Bangla voice</small></td>
+        <td data-l="Licence">Engine: original MIT, active fork <span class="mono">piper1-gpl</span> এখন GPL-3.0 <span class="badge b-warn">⚠️</span> — commercial use allowed, তবে engine embed/redistribute করলে copyleft। <b>প্রতিটা voice-এর licence আলাদা — voice card check করো</b></td>
+        <td data-l="Hardware">CPU / Raspberry Pi class; প্রতি voice &lt;100 MB</td>
+        <td data-l="Languages">50+ — এর মধ্যে <span class="cmd">bn_BD-google-medium</span> (Bangla, Bangladesh) + bn_IN voices — <b>একমাত্র local bn-BD voice</b> <span class="badge b-info">শুধু draft</span></td>
+        <td data-l="Cloning">❌ Cloning/emotion নেই; quality intelligible-but-flat (VITS) — animatic-এর timing/scratch VO-র জন্য ঠিক আছে, <b>final client audio-র জন্য না</b></td>
+      </tr>
+      <tr>
+        <td class="name">F5-TTS<small>336M — quality দারুণ, কিন্তু…</small></td>
+        <td data-l="Licence">Code MIT / <b>weights CC-BY-NC-4.0</b> <span class="badge b-no">❌ NON-commercial</span> (Emilia training data)</td>
+        <td data-l="Hardware">Consumer GPU (~4 GB class)</td>
+        <td data-l="Languages">EN/ZH/JP etc. — Bengali headline language না</td>
+        <td data-l="Cloning">✅ Excellent zero-shot cloning — কিন্তু released checkpoint দিয়ে <b>paid client work legally করা যাবে না</b>; personal experiment only</td>
+      </tr>
+      <tr>
+        <td class="name">XTTS-v2 ⛔<small>Coqui · 17 langs</small></td>
+        <td data-l="Licence">Coqui Public Model Licence <span class="badge b-no">❌ NON-commercial only</span></td>
+        <td data-l="Hardware">~2–6 GB VRAM class</td>
+        <td data-l="Languages">17 (Hindi সহ) — ❌ Bengali নেই</td>
+        <td data-l="Cloning">✅ 6 s cloning, quality এখনো ভালো — <b>কিন্তু adopt কোরো না: Coqui Jan 2024-এ shut down, commercial licence কেনার উপায়ই নেই, project abandonware</b></td>
+      </tr>
+      <tr>
+        <td class="name">Fish Speech / S1 / S2<small>open weights</small></td>
+        <td data-l="Licence"><b>CC-BY-NC-SA-4.0</b> <span class="badge b-no">❌ NON-commercial</span> — commercial মানে paid Fish Audio API / আলাদা licence (এক source-এ ~$10k/mo tier reported)</td>
+        <td data-l="Hardware">~4 GB VRAM (0.5B–4B family)</td>
+        <td data-l="Languages">Hosted version 80+ langs দাবি করে; open 1.5 = 13 langs — open weights-এ Bengali confirm হয়নি</td>
+        <td data-l="Cloning">✅ 10–30 s cloning, খুব expressive — open weights দিয়ে personal only</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Honourable mentions: <b>Orpheus / CosyVoice 2 / Dia / Zonos</b> — Apache 2.0 (per licence round-ups), 0.5B–3B, মূলত EN/ZH, Bengali নেই; উপরের pick-গুলোর চেয়ে বেশি DIY।</p>
+  <div class="okbox"><b>মনে রাখো:</b> কোনো মডেলের licence কখনোই <em>কোনো মানুষের voice</em>-এর অধিকার দেয় না — যেকোনো clone-এর জন্য সেই মানুষের consent নাও।</div>
+  <p class="src">Sources: cartesia.ai, localaimaster.com, github.com/resemble-ai/chatterbox, learn.microsoft.com (Azure language support)</p>
+</section>
+
+<!-- ============ STAGE 3 ============ -->
+<section id="stage3">
+  <div class="sec-head"><span class="sec-num">STAGE 3</span><h2>Storyboard Design — Local Image Models (ComfyUI)</h2></div>
+  <p class="sec-sub">যে workflow টা কাজ করে: Script (Stage 1) → ComfyUI-তে frame generate → board + shot notes <b>Figma</b>-তে সাজাও (client comments-এর জন্যও Figma-ই চেনা) → একই frame Stage 4-তে image-to-video-র first frame হিসেবে reuse। Local-এ character consistency মানে: <b>LoRA (character/product-এর ওপর trained) + ControlNet (pose/depth) + IP-Adapter/PuLID face reference + fixed seed</b> — প্রতি brand character-এর জন্য একবার build করতে হয়, cloud Nano Banana-র মতো one-click না।</p>
+
+  <div class="pick">
+    <div class="pick-main">
+      <span class="pick-tag">#1 Pick — Text-in-frame / Boards</span>
+      <h3>Qwen-Image (GGUF Q4) <span style="font-size:15px;color:var(--ink3)">+ Qwen-Image-Edit-2511</span></h3>
+      <p>Local-এ text-in-image-এ <b>অনেক ব্যবধানে সেরা</b> — multi-line, এমনকি paragraph layout পর্যন্ত। Prompt adherence শক্ত, Edit variant instruction edit / inpainting / multi-reference consistency করে — product board আর poster-style frame-এর জন্য দারুণ। Photoreal দরকার হলে পাশে <b>FLUX.1-schnell</b>। ⚠️ Text rendering proven শুধু EN / Chinese / Japanese / Korean-এ — <b>Bengali script render হবে ধরে নিও না</b>; বাংলা type Photoshop/Figma-তে আসল text layer হিসেবে বসাও।</p>
+    </div>
+    <div class="pick-side"><dl>
+      <dt>Licence</dt><dd>Apache 2.0 <span class="badge b-ok">✅ Commercial OK</span></dd>
+      <dt>VRAM</dt><dd>GGUF Q4_K_S ~12–13 GB file, &lt;12 GB VRAM tier · Q2/Q3 ~8 GB · FP8 16–24 GB</dd>
+      <dt>দুর্বলতা</dt><dd>FLUX/SDXL থেকে heavy/slow; LoRA ecosystem ছোট; photoreal skin FLUX থেকে এক notch নিচে</dd>
+      <dt>Photoreal pair</dt><dd>FLUX.1-schnell (GGUF Q4/Q5, 6–8 GB)</dd>
+    </dl></div>
+  </div>
+
+  <table class="models">
+    <thead><tr><th>Model</th><th>Licence → Commercial?</th><th>VRAM (ComfyUI)</th><th>Storyboard / Social-এ শক্তি</th><th>দুর্বলতা / Text</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="name">Qwen-Image ⭐<small>20B MMDiT, Aug 2025</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅ Unrestricted</span></td>
+        <td data-l="VRAM">BF16 40 GB+ · FP8 ~16–24 GB · GGUF Q4 &lt;12 GB tier</td>
+        <td data-l="শক্তি">সেরা local text-in-image; Edit variant দিয়ে frame revision ও consistency</td>
+        <td data-l="Text">EN/CN/JP/KR proven — <b>Bengali NOT documented; হবে না ধরে নাও</b></td>
+      </tr>
+      <tr>
+        <td class="name">FLUX.1 [schnell] ⭐<small>12B · photoreal commercial pick</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅ Yes</span></td>
+        <td data-l="VRAM">GGUF Q4/Q5 6–8 GB · FP8 ~12 GB</td>
+        <td data-l="শক্তি">মাত্র 1–4 step — খুব fast iteration; শক্ত photorealism + prompt adherence; বড় LoRA ecosystem</td>
+        <td data-l="Text">Distilled tier — dev থেকে এক ধাপ নিচে; English text শুধু short headline-এ passable</td>
+      </tr>
+      <tr>
+        <td class="name">FLUX.1 [dev] ⚠️<small>12B · licence trap!</small></td>
+        <td data-l="Licence"><b>Non-Commercial Licence</b> <span class="badge b-no">❌ Weights</span> — BFL self-hosting licence বিক্রি করে, public price নেই</td>
+        <td data-l="VRAM">GGUF Q4 6–8 GB · FP8 12–16 GB · BF16 24 GB</td>
+        <td data-l="শক্তি">সেরা local photoreal quality; Kontext variant character-consistent editing-এ সেরা</td>
+        <td data-l="Text"><b>শুধু internal test / pitch mock-up</b> — licence ছাড়া client final ship কোরো না</td>
+      </tr>
+      <tr>
+        <td class="name">FLUX.2 [klein] 4B<small>2026 · নতুন</small></td>
+        <td data-l="Licence">Apache 2.0 ✅ — <b>শুধু 4B</b>; 9B আর FLUX.2 [dev] 32B non-commercial</td>
+        <td data-l="VRAM">~8–13 GB (ComfyUI-তে ~8.4 GB measured, distilled)</td>
+        <td data-l="শক্তি">খুব fast; generation + multi-reference editing এক মডেলে; LoRA-trainable base</td>
+        <td data-l="Text">Ecosystem FLUX.1 থেকে নতুন/ছোট; short text only</td>
+      </tr>
+      <tr>
+        <td class="name">SDXL 1.0 ⭐<small>budget / low-VRAM #1 · Juggernaut XL, RealVisXL ইত্যাদি</small></td>
+        <td data-l="Licence">CreativeML OpenRAIL++-M <span class="badge b-warn">⚠️</span> — use restriction সহ commercial allowed। ⚠️ <b>প্রতিটা community checkpoint-এর licence আলাদা — check করো</b></td>
+        <td data-l="VRAM"><b>6–8 GB</b> — quality মডেলগুলোর মধ্যে সর্বনিম্ন</td>
+        <td data-l="শক্তি"><b>সবচেয়ে বড় LoRA / ControlNet / fine-tune library</b> — specific illustration style, anime/2D board, বা weak GPU-তে trained brand character চাইলে এটাই</td>
+        <td data-l="Text">সবচেয়ে পুরনো — prompt adherence ও text সবচেয়ে দুর্বল (text প্রায় unusable); face/hand-এ detailer pass লাগে</td>
+      </tr>
+      <tr>
+        <td class="name">SD 3.5 Large<small>8B</small></td>
+        <td data-l="Licence">Stability Community Licence <span class="badge b-warn">⚠️</span> — terms অনুযায়ী $1M revenue threshold-এর নিচে free</td>
+        <td data-l="VRAM">~12 GB FP8</td>
+        <td data-l="শক্তি">SDXL থেকে ভালো adherence, decent ecosystem</td>
+        <td data-l="Text">নতুন setup-এ Qwen/FLUX দিয়ে largely superseded; weak-moderate text</td>
+      </tr>
+      <tr>
+        <td class="name">Z-Image Turbo / Base<small>2026 · honourable mention</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅</span> (cited model cards অনুযায়ী)</td>
+        <td data-l="VRAM">Consumer GPU; Turbo fast, Base LoRA-trainable</td>
+        <td data-l="শক্তি">Realistic people — commercially post করা যায়</td>
+        <td data-l="Text">খুব নতুন, community ছোট — client use-এর আগে card verify করো; text not proven</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Board সাজানোর টুল (generator না) — brief</h3>
+  <div class="grid c2">
+    <div class="card"><h4>✅ Free / Local pick: Figma + ComfyUI frames — $0 extra</h4><p>তোমার stack-এ already আছে, client-রাও Figma comments চেনে। এটাই recommendation।</p></div>
+    <div class="card"><h4>Boords — client-review standard, কিন্তু দাম বেড়েছে ⚠️</h4><p>Solo এখন <b>$26/mo (yearly billed) / $39 monthly</b> — আগে commonly $12 quote হতো। Animatic + frame comments-এ সেরা।</p></div>
+    <div class="card"><h4>StoryboardHero — সবচেয়ে সস্তা dedicated AI tool</h4><p>Solo <b>$19/mo</b> — unlimited standard AI images + 100 premium, branded PDF।</p></div>
+    <div class="card"><h4>বাকিগুলো</h4><p><b>StudioBinder</b> ~$42/mo — শুধু full production paperwork লাগলে। <b>Milanote</b> $9.99–13/mo / freemium — moodboard। <b>Frame.io</b> Pro $15/member/mo — এটা storyboard না, <em>final video review</em>-এর।</p></div>
+  </div>
+  <p class="src">Sources: localaimaster.com, comfyui-mcp.artokun.io, ondelva.com, boords.com</p>
+</section>
+
+<!-- ============ STAGE 4 ============ -->
+<section id="stage4">
+  <div class="sec-head"><span class="sec-num">STAGE 4</span><h2>Final Output — Local Video (ComfyUI) + After Effects</h2></div>
+  <div class="warnbox"><b>Reality check:</b> 2026-এ local video মানে <strong>5–10 second clip</strong>, 60s film না। Professional pattern আগের মতোই: hero insert / product move / background local-এ generate করো → <b>assemble, type, grade, sound — সব finish Premiere + After Effects-এ</b>। তোমার AE skill-ই moat; কোনো generator সেটা replace করছে না। Simple product/nature shot-এ local এখন cloud mid-tier-এর কাছে, কিন্তু complex human motion, hands, multi-shot consistency-তে Veo/Runway/Kling থেকে পিছিয়ে — usable clip প্রতি cloud-এর চেয়ে <b>2–4× বেশি attempt</b> budget রাখো। কোনো local মডেল usable Bengali dialogue audio দেয় না; LTX-2.x-এর built-in audio English-centric ambience — mute করে Stage 2-র VO বসাও।</div>
+
+  <div class="pick">
+    <div class="pick-main">
+      <span class="pick-tag">#1 Pick — Local Video</span>
+      <h3>Wan 2.2 <span style="font-size:15px;color:var(--ink3)">· Alibaba</span></h3>
+      <p><b>8 GB থাকলে TI2V-5B, 24/12 GB থাকলে A14B।</b> Apache-clean, local-এ সেরা quality, আর image-to-video তোমার storyboard-first workflow-র সঙ্গে perfect fit — Stage 3-র frame সরাসরি animate করো। <b>Wan 2.2 Animate-14B</b> variant reference performance video দিয়ে character image drive / replace করতে পারে — brand film-এর জন্য খুব relevant। VBench-type score open models-এর মধ্যে highest দাবি করা হয় (~84.7% cited)।</p>
+    </div>
+    <div class="pick-side"><dl>
+      <dt>Licence</dt><dd>Apache 2.0 <span class="badge b-ok">✅ Unrestricted</span></dd>
+      <dt>5B (8 GB pick)</dt><dd>~8 GB (ComfyUI offload) · 720p @ 24fps, ~5s · text+image-to-video এক মডেলে</dd>
+      <dt>A14B (quality)</dt><dd>FP8: 24 GB · GGUF Q4_K_S: &lt;12 GB · Lightning LoRA-তে 4090-তে 5s clip ~71s</dd>
+      <dt>RAM</dt><dd>32 GB recommended</dd>
+    </dl></div>
+  </div>
+
+  <table class="models">
+    <thead><tr><th>Model</th><th>Licence → Commercial?</th><th>VRAM / RAM</th><th>Output / Best Use</th><th>Cloud-এর সঙ্গে Gap</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="name">Wan 2.2 TI2V-5B ⭐<small>8 GB pick</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅</span></td>
+        <td data-l="VRAM">~8 GB offload সহ (official Wan scripts 24 GB চায়) · 32 GB RAM rec.</td>
+        <td data-l="Output">720p @ 24fps, ~5s — storyboard frame সরাসরি animate</td>
+        <td data-l="Gap">Product/travel B-roll-এ ভালো motion; A14B থেকে detail soft</td>
+      </tr>
+      <tr>
+        <td class="name">Wan 2.2 T2V/I2V-A14B ⭐<small>27B total MoE, 14B active · quality pick</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅</span></td>
+        <td data-l="VRAM">FP8 24 GB · GGUF Q4 &lt;12 GB, Q5 12–24 GB, Q8 24 GB+</td>
+        <td data-l="Output">480p/720p ~5s (extend/loop করে লম্বা); Animate-14B variant আছে</td>
+        <td data-l="Gap"><b>Cloud mid-tier-এর সবচেয়ে কাছে (local)</b>; Veo 3.1 / Kling 2.5+-এর কাছে humans + consistency-তে হার মানে</td>
+      </tr>
+      <tr>
+        <td class="name">Wan 2.1 T2V-1.3B<small>older, ultra-low VRAM</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅</span></td>
+        <td data-l="VRAM">8.19 GB stated</td>
+        <td data-l="Output">Low-res draft / previz — প্রায় যেকোনো GPU-তে</td>
+        <td data-l="Gap">Quality লক্ষণীয়ভাবে পুরনো — previz only</td>
+      </tr>
+      <tr>
+        <td class="name">HunyuanVideo 1.5<small>Tencent · 8.3B · Nov 2025</small></td>
+        <td data-l="Licence">Tencent Hunyuan Community Licence <span class="badge b-warn">⚠️</span> — commercial allowed, তবে <b>EU / UK / South Korea-তে licence apply হয় না</b> (Bangladesh fine); &gt;100M MAU হলে আলাদা licence</td>
+        <td data-l="VRAM">14 GB floor (offload) · 24 GB comfortable</td>
+        <td data-l="Output">720p native (super-res দিয়ে 1080p), ~5–10s / 121 frames; cinematic lighting-এর জন্য praised; 480p step-distilled I2V draft-এ fast</td>
+        <td data-l="Gap">Wan 2.2-র একই tier — licence cleanliness-এ Wan আগে, look পছন্দ হলে Hunyuan</td>
+      </tr>
+      <tr>
+        <td class="name">HunyuanVideo (original, 13B) ⛔<small>2024</small></td>
+        <td data-l="Licence">Same Tencent licence <span class="badge b-warn">⚠️</span></td>
+        <td data-l="VRAM"><b>45–60 GB</b> (80 GB recommended)</td>
+        <td data-l="Output">—</td>
+        <td data-l="Gap"><b>Consumer hardware-এ install কোরো না</b> — 1.5 দিয়ে superseded</td>
+      </tr>
+      <tr>
+        <td class="name">LTX-Video 0.9.x<small>Lightricks · original</small></td>
+        <td data-l="Licence">Apache 2.0 <span class="badge b-ok">✅</span> (0.9 line-এর repo listings অনুযায়ী)</td>
+        <td data-l="VRAM">~8 GB</td>
+        <td data-l="Output">Fast iteration, short clips — 12 GB card-এর practical LTX</td>
+        <td data-l="Gap">Fidelity LTX-2.x / Wan থেকে কম; speed-ই এর point</td>
+      </tr>
+      <tr>
+        <td class="name">LTX-2 / 2.3 / 2.5<small>22B · Lightricks</small></td>
+        <td data-l="Licence">LTX Community Licence <span class="badge b-warn">⚠️</span> — <b>$10M annual revenue-র নিচে free commercial</b>, উপরে paid licence; gated download। ⚠️ কিছু blog ভুল করে Apache বলে — official licence page-ই বিশ্বাস করো</td>
+        <td data-l="VRAM">Official min <b>32 GB VRAM / 32 GB RAM</b>; community int8/distilled path ~12 GB (quality/speed trade-off)</td>
+        <td data-l="Output">480p–1080p, 5–20s — <b>একমাত্র local family যা synchronised audio+video একসঙ্গে generate করে</b></td>
+        <td data-l="Gap">Local trio-র মধ্যে fastest; audio ambience হিসেবে bonus, VO replacement না</td>
+      </tr>
+      <tr>
+        <td class="name">CogVideoX-2B / 5B / 1.5-5B<small>Tsinghua / Zhipu</small></td>
+        <td data-l="Licence">2B: Apache 2.0 ✅ · 5B: CogVideoX Licence <span class="badge b-warn">⚠️</span> — sources conflict করে, client use-এর আগে 5B repo check করো</td>
+        <td data-l="VRAM">2B: 3.6 GB INT8 · 5B: 4.4 GB INT8 / 1.5-5B ~10 GB optimised (full-precision practical figure বেশি হতে পারে)</td>
+        <td data-l="Output">720×480 বা 1360×768 (1.5), ~6–10s; size অনুযায়ী strong multi-clause prompt adherence</td>
+        <td data-l="Gap">2024 generation — Wan 2.2 থেকে visibly পিছিয়ে; VRAM খুব কম হলেই useful</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Mentions: <b>Mochi 1</b> (Apache 2.0, full ~60 GB) আর <b>AnimateDiff</b> (Apache motion module, licence তোমার SD checkpoint অনুযায়ী — ComfyUI-তে stylised 2D/looping social clip-এর জন্য এখনো handy)। দুটোই photoreal কাজে superseded।</p>
+
+  <div class="card" style="margin-top:14px">
+    <h3>তোমার existing stack — Adobe-তে 2025–26-তে যা বদলালো</h3>
+    <p>Premiere Pro (IBC Sep 2026) timeline-এই <b>Generative Media Tool</b> পেয়েছে — gap-এ video/SFX generate করা যায় Firefly <em>বা partner model (Veo, Kling, Runway, Luma)</em> দিয়ে, edit না ছেড়েই। সঙ্গে Generative Extend, Generate Music/Soundscape (beta), Enhance Audio, Media Intelligence search। <b>After Effects-এ AI Assistant (public beta)</b> এসেছে multi-step task/expression-এর জন্য।</p>
+    <p><b>Verdict:</b> AE/Premiere কোনো generator দিয়ে replaced হচ্ছে না — ওরাই finishing hub, Adobe এখন cloud model গুলো ভেতরেই rent দেয় (generative credits apply)। Local ComfyUI clip সেখানে ordinary footage হিসেবেই বসে।</p>
+    <p class="src">Source: provideocoalition.com, bestfreewebresources.com, runpod.io</p>
+  </div>
+</section>
+
+<!-- ============ STAGE 5 ============ -->
+<section id="stage5">
+  <div class="sec-head"><span class="sec-num">STAGE 5</span><h2>Social Media Post Design — Brief</h2></div>
+  <p class="sec-sub">~180 graphics / 9 weeks (~20/week) হলে bottleneck image generation না — <b>layout throughput</b>।</p>
+  <div class="grid c3">
+    <div class="card">
+      <p class="big">🥇 Local / Free #1</p>
+      <h3>Figma + ComfyUI Images</h3>
+      <p>Figma (already owned)-তে component/template system + ComfyUI image (headline frame-এ Qwen-Image, background-এ FLUX.1-schnell/SDXL)। $0 marginal cost, full brand control, আর Bangla type editable real text থাকে — critical, কারণ কোনো generator-ই reliably Bengali type বসাতে পারে না।</p>
+    </div>
+    <div class="card">
+      <p class="big">☁️ Cloud #1</p>
+      <h3>Canva Pro — $144/yr</h3>
+      <p>CSV থেকে Bulk Create, 5 Brand Kits, Magic Resize + scheduler — high-volume variant-এর জন্য fastest।</p>
+    </div>
+    <div class="card">
+      <p class="big">💰 Already-paid</p>
+      <h3>Adobe Express Premium</h3>
+      <p>$9.99/mo — কিন্তু <b>Creative Cloud-এর সঙ্গে included</b>, তাই তোমার জন্য effectively $0 extra, আর Adobe Fonts/Stock + Firefly-তে Canva থেকে এগিয়ে। Hero post-এর জন্য Photoshop-ই থাক। Final social copy কোনো image model-এর ভেতরে generate কোরো না — local হোক বা cloud।</p>
+    </div>
+  </div>
+  <p class="src">Sources: quasa.io, theplainmanual.com</p>
+</section>
+
+<!-- ============ PIPELINE ============ -->
+<section id="pipeline">
+  <div class="sec-head"><span class="sec-num">FLOW</span><h2>Recommended End-to-End Local Pipeline</h2></div>
+  <p class="sec-sub">সব মিলিয়ে একটা $0 workflow — আসল খরচ শুধু 12–24 GB NVIDIA GPU আর generation time।</p>
+  <div class="flow">
+    <div class="step"><div class="step-dot">1</div><div class="step-body"><b>Setup — Pinokio</b><p>Pinokio ইন্সটল করে তার ভেতর থেকে <b>LM Studio</b> আর <b>ComfyUI</b> বসাও। বাকি সব এর পর।</p></div></div>
+    <div class="step"><div class="step-dot">2</div><div class="step-body"><b>Idea + Script — LM Studio · Qwen3-14B</b><p>Hook, story, 60s script (~130–160 words), shot list। Temperature 0.9–1.1-তে creative draft।</p></div></div>
+    <div class="step"><div class="step-dot">3</div><div class="step-body"><b>Voice — Chatterbox / Kokoro / Piper</b><p>English final VO: <b>Chatterbox</b> (নিজের voice clone সহ)। Scratch/timing: <b>Kokoro</b>। Bangla timing draft only: <b>Piper bn_BD</b> — Bangla final-এর জন্য cloud/human (নিচে Cloud Fallback দেখো)।</p></div></div>
+    <div class="step"><div class="step-dot">4</div><div class="step-body"><b>Storyboard — ComfyUI · Qwen-Image-Edit + FLUX.1-schnell</b><p>Text/product frame-এ Qwen-Image, photoreal frame-এ schnell। Consistency: LoRA + ControlNet + IP-Adapter + fixed seed। Board ও client comments: <b>Figma</b>। বাংলা type এখানেই আসল text layer হিসেবে বসবে।</p></div></div>
+    <div class="step"><div class="step-dot">5</div><div class="step-body"><b>Animate — ComfyUI · Wan 2.2 I2V</b><p>Storyboard frame গুলোই first frame — 5s করে hero insert, product move, background generate করো। Speed লাগলে LTX।</p></div></div>
+    <div class="step"><div class="step-dot">6</div><div class="step-body"><b>Finish — Premiere + After Effects</b><p>Assemble, titles, Bangla type, grade, sound mix। Timeline-এর gap-এ Adobe-র in-timeline generative tool — শুধু দরকার হলে। Social cut-down একই Figma/ComfyUI asset থেকে।</p></div></div>
+  </div>
+  <div class="okbox"><b>একটাই cloud sub যোগ করো — শুধু যখন লাগবে:</b> <b>Google AI Pro $19.99/mo</b> (Veo + Nano Banana + Gemini polish + Bangla-capable Gemini TTS unlock হয়) <em>অথবা</em> Bangla-heavy মাসে <b>ElevenLabs Creator $22/mo</b>। দুটো একসঙ্গে নয়।</div>
+</section>
+
+<!-- ============ TRAPS ============ -->
+<section id="traps">
+  <div class="sec-head"><span class="sec-num">⚠️</span><h2>Licence Traps — এই ৩টা মুখস্থ রাখো</h2></div>
+  <p class="sec-sub">Licence গুলো এই research-এর summary — legal advice না। তুমি যে exact checkpoint download করবে, তার model card নিজে পড়ো; এই market-এর #1 trap-ই হলো code licence ≠ weights licence।</p>
+  <div class="trap"><b>Trap 1 — FLUX.1 [dev] ≠ FLUX.1 [schnell].</b> Dev = non-commercial weights (কিছু reading-এ output commercial usable হলেও, BFL licence ছাড়া paid pipeline dev-এর ওপর বানিও না — public price নেই)। Schnell = Apache 2.0, fully commercial। Client work-এ schnell/SDXL-ই safe।</div>
+  <div class="trap"><b>Trap 2 — XTTS-v2, F5-TTS, Fish Speech-এর open weights = NON-commercial।</b> Quality যতই ভালো হোক, paid client work-এ legally ব্যবহার করা যাবে না। আর Coqui মৃত — XTTS-এর licence কেনার উপায়ও নেই।</div>
+  <div class="trap"><b>Trap 3 — "Community licence" ≠ Apache।</b> Llama, Gemma 3, HunyuanVideo, LTX-2.x, CogVideoX-5B সবই শর্ত সাপেক্ষে commercial use দেয় (user cap / revenue cap / territory exclusion)। Bangladesh-এর solo designer হিসেবে তুমি fine — তবু clause টা পড়ে নাও।</div>
+
+  <h3>⛔ Dead / Changed / Worsened (2025–26)</h3>
+  <ul class="tight">
+    <li><b>Play.ht / PlayAI — DEAD:</b> Meta team acqui-hire করেছে (July 2025); service 31 Dec 2025-এ shut down, clone গুলো deleted, migration নেই।</li>
+    <li><b>Sora — DEAD:</b> app বন্ধ 26 Apr 2026, API shut 24 Sep 2026, কোনো replacement নেই।</li>
+    <li><b>Coqui (XTTS) — company dead Jan 2024 থেকে:</b> licence কেনা যায় না, project abandonware।</li>
+    <li><b>Boords-এর দাম বেড়েছে:</b> Solo $26/mo (yearly) – $39/mo।</li>
+    <li><b>Runway Unlimited plan Max ($95) দিয়ে replaced</b> হয়েছে 2026-এ।</li>
+    <li><b>Gemini TTS:</b> intro API price 1 Jan 2027 থেকে double; Gemini 2.5/3.1 TTS models retire হবে 17 Nov 2026।</li>
+    <li><b>Claude:</b> $20 Pro price ধরে থাকলেও sources বলছে effective usage tightened / peak-hour burn বেড়েছে 2026-এ (Anthropic disputed করেছে) — কেনার সময় verify করো।</li>
+    <li><b>Piper-এর active fork MIT → GPL-3.0</b> হয়েছে (original repo archived Oct 2025)।</li>
+    <li><b>OpenAI tts-1 / gpt-4o-mini-tts</b> Jan 2027-এ shutdown/replacement-এর report একটা round-up-এ এসেছে — API-র ওপর build করার আগে verify করো।</li>
+  </ul>
+</section>
+
+<!-- ============ CLOUD FALLBACK ============ -->
+<section id="cloud">
+  <div class="sec-head"><span class="sec-num">☁️</span><h2>Cloud Fallback — শুধু Brief</h2></div>
+  <p class="sec-sub">Local-first প্ল্যানে cloud দরকার মাত্র দুই জায়গায়: Bangla final VO, আর hero কাজের final polish। সব cloud-এই Bangladesh friction একই: USD billing / international card লাগবে। দাম US list price — Bangladesh checkout-এ tax/price আলাদা হতে পারে।</p>
+  <div class="grid c2">
+    <div class="card">
+      <h3>Script polish — তিনটাই $20/mo anchor</h3>
+      <p>ChatGPT Plus $20 · Claude Pro $20 ($17 annual) · Google AI Pro $19.99। 2026 reviews-এ <b>Claude #1 natural, least-AI-sounding prose</b>-তে; GPT-5.x research+structure-এ সেরা; Gemini per-token সবচেয়ে সস্তা আর bundle value সেরা — Flow/Veo + Nano Banana unlock হয় বলে এই designer-এর জন্য <b>সেরা single $20 arguably Gemini</b>, যদিও লেখায় Claude এগিয়ে।</p>
+      <p class="src">Source: techloghub.com, awesomeagents.ai</p>
+    </div>
+    <div class="card">
+      <h3>Bangla final VO — এখানেই cloud লাগবে</h3>
+      <p><b>ElevenLabs #1 overall:</b> Starter $6/mo (30k credits, commercial + instant cloning), Creator $22 (121k, professional cloning), Pro $99 (600k)। ⚠️ <b>Bengali শুধু Eleven v3-তে</b> (70+ langs) — Multilingual v2 বা Flash v2.5-এ নেই, আর v3-র per-character credit cost clearly published না; ছোট script দিয়ে Bangla খরচ test করে নাও।</p>
+      <p><b>সেরা আসল bn-BD voices: Microsoft Azure Speech</b> — dedicated <span class="cmd">bn-BD-NabanitaNeural</span> (F) / <span class="cmd">bn-BD-PradeepNeural</span> (M), ~$15/1M chars neural, 0.5M free/mo। ElevenLabs থেকে কম emotional, কিন্তু genuinely Bangladeshi dialect।</p>
+      <p><b>Google Gemini TTS</b> explicitly "Bangla (Bangladesh)" list করে, natural-language direction দেয়, API-তে খুব সস্তা (~$0.54–0.81/hr output, intro rates) — ⚠️ rate গুলো 1 Jan 2027 থেকে double। <b>Google Cloud TTS</b> সবচেয়ে সস্তা at scale ($4/1M standard, $16/1M WaveNet/Neural2) কিন্তু Bengali টা bn-IN, bn-BD না। Murf Creator $29/mo ($19 annual) English explainer studio UI হিসেবে ভালো; OpenAI TTS (~$0.015/min) steerable English-এ ভালো, cloning নেই।</p>
+      <p class="src">Source: bundledseo.com, convo360.ai, learn.microsoft.com, rankite.com</p>
+    </div>
+    <div class="card">
+      <h3>Image consistency — Nano Banana Pro</h3>
+      <p>Gemini image — consistency + text-এ #1 (~95% text accuracy round-up-গুলোতে, ~$0.067/image API বা Google AI Pro $19.99-তে bundled)। Round-up অনুযায়ী এটা হাতে গোনা cloud model-এর একটা যা <b>Bengali text render করে</b> বলে report এসেছে (single round-up claim — hands-on verify হয়নি)। বাকি: Ideogram ($15–20/mo) pure headline typography-তে সেরা; Recraft ($10–12/mo) vectors/brand palette; Midjourney ($10 Basic / $30 Standard) look সেরা, text সবচেয়ে খারাপ (40–60%), free tier নেই; Adobe Firefly ($9.99/mo বা CC-তে) commercially-indemnified safe pick।</p>
+      <p class="src">Source: ondelva.com</p>
+    </div>
+    <div class="card">
+      <h3>Video — hero shot-এর জন্য</h3>
+      <p><b>Veo 3.1 via Flow / Google AI Pro $19.99</b> (1,000 Flow credits/mo; Quality = 100 credits per 8s clip) — best single-shot quality + native audio। (⚠️ Veo 3.1 preview API models 22 Oct 2026-এ shut হয়েছে; Flow access চলছে।) <b>Runway Gen-4/4.5</b> ($15 Standard/625 credits, $35 Pro; 12 credits/s) — multi-shot References/character consistency + editor-এ সেরা। <b>Kling 2.5 Turbo</b> (~$7–10 Standard) — সবচেয়ে সস্তা usable cloud clip (~$0.40 per 8s product demo, একটা head-to-head অনুযায়ী), social volume-এর best value। Luma Plus $30, Hailuo/MiniMax ~$10–15, Pika $8–10 (social effects)।</p>
+      <p class="src">Source: writingmate.ai, dreamdrive.ai</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPEN QUESTIONS ============ -->
+<section id="open">
+  <div class="sec-head"><span class="sec-num">?</span><h2>যা Verify করা যায়নি — Open Questions</h2></div>
+  <ul class="tight">
+    <li><b>Local LLM-এর বাংলা quality:</b> কোনো rigorous 2025–26 creative-writing benchmark নেই। "Qwen বাংলায় সেরা" দাবিটা community notes + একটা fine-tuning study-র ওপর দাঁড়িয়ে — আসল Bangla brief-এ Qwen3-14B vs Gemma 3 12B নিজে A/B করো।</li>
+    <li><b>Bengali text rendering:</b> Qwen-Image শুধু EN/CN/JP/KR document করে; Nano Banana-র Bengali text ability একটা single round-up claim। কোনোটাই hands-on verify হয়নি।</li>
+    <li><b>F5-TTS / XTTS-v2-র exact VRAM:</b> source ভেদে wildly আলাদা — ranges indicative (দুটোই non-commercial, তাই client work-এ point টা moot)।</li>
+    <li><b>CogVideoX-5B ও Mistral Small-এর licence:</b> sources-এ conflicting reporting — exact repo/card check করো।</li>
+    <li><b>কোনো hands-on testing হয়নি:</b> সব quality ranking 2025–26 review/benchmark round-up-এর synthesis, যেগুলো নিজেদের মধ্যেও margin-এ disagree করে।</li>
+  </ul>
+  <div class="warnbox"><b>তোমার পরের step:</b> উপরের Hardware section-এ <b>তোমার RAM আর VRAM — দুটোই সিলেক্ট করো</b> (যেমন 32 GB RAM + 12 GB VRAM)। কোনো stage-এ দুটো selector-এর যেটা ছোট, সেটাই আসল limit — RAM বেশি থাকলেও VRAM কম হলে বড় image/video মডেলে quant/offload লাগবে, আবার VRAM বেশি থাকলেও RAM কম হলে offload আর একসঙ্গে app খোলায় আটকাবে। নিজের exact RAM/VRAM জানালে সেই অনুযায়ী "কোনটা smooth চলবে, কোনটা চলবেই না" shortlist-ও বানিয়ে দেওয়া যাবে।</div>
+</section>
+
+<footer>
+  <h3>Sources</h3>
+  <ul class="src-list">
+    <li>Runners: <a href="https://www.aixploria.com/en/pinokio/">aixploria.com/en/pinokio</a> · <a href="https://thegtmdirectory.com/tools/pinokio">thegtmdirectory.com/tools/pinokio</a> · <a href="https://www.storagereview.com/best/local-llm-tools">storagereview.com</a> · <a href="https://www.guidetoartificialintelligence.com/en/learn/run-models-own-computer-2026/">guidetoartificialintelligence.com</a></li>
+    <li>Local LLMs: <a href="https://www.spheron.network/blog/run-qwen3-locally-gpu-requirements-2026/">spheron.network</a> · <a href="https://dexity.com/intel/run-qwen-locally-2026">dexity.com</a> · <a href="https://intelligibberish.com/articles/2026-09-27-best-local-llm-for-everyday-tasks/">intelligibberish.com</a> · <a href="https://induwara.lk/tools/ai-llm-license-checker">induwara.lk</a> · <a href="https://www.promptquorum.com/power-local-llm/best-local-llm-creative-writing">promptquorum.com</a></li>
+    <li>Local TTS: <a href="https://www.cartesia.ai/learn/open-source-tts">cartesia.ai/learn/open-source-tts</a> · <a href="http://localaimaster.com/blog/best-local-tts-models">localaimaster.com</a> · <a href="https://localaimaster.com/blog/qwen3-tts-local-setup">localaimaster.com/qwen3-tts</a> · <a href="https://github.com/resemble-ai/chatterbox/blob/HEAD/README.md">github.com/resemble-ai/chatterbox</a></li>
+    <li>Local image: <a href="https://localaimaster.com/blog/best-local-image-models-compared">localaimaster.com</a> · <a href="https://localaimaster.com/blog/flux-local-image-generation">localaimaster.com/flux</a> · <a href="https://localaimaster.com/models/qwen-image-local-guide">localaimaster.com/qwen-image</a> · <a href="https://comfyui-mcp.artokun.io/docs/blog/qwen-image-comfyui">comfyui-mcp.artokun.io</a></li>
+    <li>Local video: <a href="https://www.bestfreewebresources.com/comfyui-video-generation-local-guide-2026">bestfreewebresources.com</a> · <a href="https://www.runpod.io/articles/guides/comfyui-wan-2-2">runpod.io</a> · <a href="https://quantacloud.net/guides/open-source-video-generation-models">quantacloud.net</a> · <a href="https://www.promptquorum.com/power-local-llm/local-ai-video-generation-vs-cloud">promptquorum.com</a></li>
+    <li>Cloud LLMs: <a href="https://techloghub.com/compare/chatgpt-vs-claude-vs-gemini">techloghub.com</a> · <a href="https://awesomeagents.ai/capabilities/creative-writing/">awesomeagents.ai</a></li>
+    <li>Cloud TTS: <a href="https://bundledseo.com/blog/elevenlabs-review/">bundledseo.com</a> · <a href="https://convo360.ai/blog/elevenlabs-pricing-for-ai-voice-agents/">convo360.ai</a> · <a href="https://learn.microsoft.com/sr-cyrl-rs/azure/ai-services/speech-service/language-support?tabs=tts">learn.microsoft.com</a> · <a href="https://rankite.com/blog/elevenlabs-alternatives">rankite.com</a></li>
+    <li>Storyboard/cloud image: <a href="http://boords.com/best-storyboard-software">boords.com</a> · <a href="https://ondelva.com/blog/2026/05/best-ai-image-generators-2026-midjourney-flux-ideogram-recraft-firefly">ondelva.com</a></li>
+    <li>Cloud video / Adobe: <a href="https://writingmate.ai/blog/best-ai-video-generator-runway-kling-luma-veo-2026">writingmate.ai</a> · <a href="https://www.dreamdrive.ai/learn/cross-platform/ai-video-cost-which-platform-for-what/">dreamdrive.ai</a> · <a href="https://www.provideocoalition.com/adobes-ibc-release-for-premiere-and-after-effects/">provideocoalition.com</a></li>
+    <li>Social: <a href="https://quasa.io/stories/canva-pro-vs-adobe-express-a-24-gap-hides-two-different-ai-limits">quasa.io</a> · <a href="https://theplainmanual.com/canva-vs-adobe-express/">theplainmanual.com</a></li>
+  </ul>
+  <p class="small">Research window: late 2025 – 5 Nov 2026। সব price/spec official বা reputable 2025–26 page থেকে নেওয়া index read — hands-on test না। Licence গুলো summary মাত্র, legal advice না: download করার আগে প্রতিটা checkpoint-এর নিজের model card পড়ো।</p>
+</footer>
+
+</div>
+<script>
+(function(){
+  function wire(btnSelector, attr, panels){
+    var btns=document.querySelectorAll(btnSelector);
+    btns.forEach(function(b){
+      b.addEventListener('click',function(){
+        btns.forEach(function(x){x.setAttribute('aria-pressed','false');});
+        b.setAttribute('aria-pressed','true');
+        var key=b.getAttribute(attr);
+        Object.keys(panels).forEach(function(k){panels[k].hidden = (k!==key);});
+      });
+    });
+  }
+  wire('.ram-btn','data-tier',{
+    r8:document.getElementById('panel-r8'),r16:document.getElementById('panel-r16'),
+    r32:document.getElementById('panel-r32'),r64:document.getElementById('panel-r64')
+  });
+  wire('.vram-btn','data-vtier',{
+    v8:document.getElementById('panel-v8'),v12:document.getElementById('panel-v12'),
+    v16:document.getElementById('panel-v16'),v24:document.getElementById('panel-v24')
+  });
+})();
+</script>
+</body>
+</html>
