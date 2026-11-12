@@ -162,7 +162,7 @@ footer h3{margin-top:0}
 <div class="wrap">
 
 <header>
-  <p class="kicker">Market Research · Late 2025 – Nov 2026 · Local-First Edition · সর্বশেষ আপডেট: 5 November 2026</p>
+  <p class="kicker">Market Research · Late 2025 – Nov 2026 · Local-First Edition · সর্বশেষ আপডেট: 12 November 2026</p>
   <h1>ফ্রি <span class="hl">Local AI Models</span> — Motion Design-এর পুরো পাইপলাইনের জন্য</h1>
   <p class="lede">Content idea ও story থেকে voice, storyboard আর final video — প্রতিটা স্টেজে এখন কোন <strong>ফ্রি, নিজের PC-তে রান হওয়া</strong> মডেলটা সবচেয়ে ভালো কাজ করবে, কোনটা commercial client work-এ legally safe, আর কোনটায় কত VRAM লাগবে — সব এক জায়গায়। Cloud এখানে শুধু fallback হিসেবে brief-এ আছে।</p>
   <div class="hero-stats">
@@ -190,15 +190,15 @@ footer h3{margin-top:0}
 
 <!-- ============ WHAT'S NEW ============ -->
 <section id="whatsnew" style="padding-top:30px">
-  <div class="sec-head"><span class="sec-num">UPDATE</span><h2>এই সপ্তাহে যা নতুন <span style="font-size:17px;color:var(--ink3)">(What's new — 5 Nov 2026 update)</span></h2></div>
-  <p class="sec-sub">Weekly update #1 — পাঁচটা verified change, নিচের প্রতিটা affected table, pick আর warning-এও apply করা হয়েছে।</p>
+  <div class="sec-head"><span class="sec-num">UPDATE</span><h2>এই সপ্তাহে যা নতুন <span style="font-size:17px;color:var(--ink3)">(What's new — 12 Nov 2026 update)</span></h2></div>
+  <p class="sec-sub">Weekly update #2 — পাঁচটা verified change, নিচের প্রতিটা affected table, pick আর warning-এও apply করা হয়েছে। বাকি সব pick অপরিবর্তিত: Qwen3-14B, Qwen-Image, FLUX 3 Image [klein], Wan 2.2, Maya 2 Native।</p>
   <div class="card">
     <ul class="tight" style="margin:0">
-      <li><b>Stage 1 — নতুন 24 GB step-up:</b> <b>Qwen3.8-27B</b> (14 Aug 2026, Apache 2.0) — 27B dense, 262K context, built-in vision; Qwen3-32B / Qwen3-30B-A3B-কে replace করল। Qwen3-14B-ই default #1 pick (12–16 GB)।</li>
-      <li><b>Stage 2 — সবচেয়ে বড় change:</b> <b>Maya 2 Native</b> (25 Oct 2026, Apache 2.0) — Bengali সহ 12 language, voice cloning — <b>প্রথম Apache-2.0 local TTS যাতে Bengali আছে</b>। পুরনো "ভালো local Bengali TTS নেই" headline আর সত্যি না; তবে finals-এর quality এখনো hands-on verify হয়নি।</li>
-      <li><b>Stage 3 — নতুন photoreal pick:</b> <b>FLUX 3 Image [klein]</b> (15 Oct 2026) — generation + editing এক checkpoint-এ; তবে licence <b>FLUX Kommunity</b> — commercial use শুধু US$5M annual revenue-র নিচে। <b>Z-Image Turbo</b> এখন named fast-photoreal pick।</li>
-      <li><b>Stage 4 — pick অপরিবর্তিত:</b> Wan 2.2-ই #1। Open Wan line 2.2-তেই শেষ — Wan 2.5-এর weights আসেনি, 2.6/2.7/3.0 API-only; নতুন local weights-এর জন্য অপেক্ষা কোরো না। Animate variant এখন <b>Wan2.2-Animate-2</b>।</li>
-      <li><b>Runners — current versions:</b> ComfyUI 0.42.0 (FLUX 3 klein-এর জন্য 0.41+ লাগবে), Ollama 0.40.x, LM Studio 0.4.28। Recommendation অপরিবর্তিত।</li>
+      <li><b>Stage 2 — সবচেয়ে বড় change: Chatterbox RETIRED ⛔</b> Resemble AI 4 Nov 2026-এ Chatterbox README-তে official notice দিয়েছে: <em>"As of August 2026, Chatterbox is retired research and is no longer maintained."</em> Code MIT licence-এ archive হিসেবে public থাকবে — কোনো support, update বা paid tier নেই; Resemble AI এখন আর কোনো voice AI বিক্রি করে না (deepfake-detection models বানায়)। তাই English client-VO cloning-এর <b>#1 pick এখন Qwen3-TTS 1.7B</b> (Apache 2.0, actively maintained, 3-second voice cloning, 10 languages, ~8 GB VRAM, CUDA-only)।</li>
+      <li><b>Stage 2 — নতুন TTS row: Ming-3.0-tts-0.5B</b> (Ant Group inclusionAI, 19–20 Oct 2026, MIT licence — commercial use allowed)। Voice cloning + voice design + expressive tags, 44.1 kHz audio, 7 languages (Bengali নেই)। Artificial Analysis Controlled Voice leaderboard-এ open-weight #1 (1069 Elo)। ⚠️ Officially শুধু datacenter GPU-তে tested, কোনো GGUF/quantized build নেই — consumer GPU-তে চলবে কিনা unverified, adopt করার আগে test করো।</li>
+      <li><b>Stage 2 — নতুন TTS row: Fish Audio Drama 3</b> (13 Oct 2026)। Open weights, 35B MoE (~3B active per token), 83 languages, bracketed stage-direction control — actor-এর মতো delivery direct করা যায়। Artificial Analysis provider-voice leaderboard-এ open-weight #1 (1275 Elo)। ⚠️ Licence: Fish Audio Community License v1.0 — free commercial use <b>শুধু US$500,000 annual revenue-র নিচে</b>; hosted TTS/cloning service-এর জন্য আলাদা licence লাগবে। (Fish Speech S1/S2 open weights আগের মতোই CC-BY-NC non-commercial।)</li>
+      <li><b>Runners — current versions:</b> ComfyUI 0.44.0 (4 Nov 2026 — MiniMax-H3 support + ProRes video encoding), Ollama 0.40.17 (10 Nov 2026); LM Studio 0.4.28 অপরিবর্তিত।</li>
+      <li><b>Stage 1 — cloud watch:</b> Qwen4-Max Preview (11 Nov 2026) — শুধু Alibaba Token Plan-এ hosted, preview শেষ 25 Nov 2026; open weights, benchmark বা per-token price এখনো published না। একটা slide-এ 27B open-weights tier দেখানো হয়েছে — watch করো, preview-র ওপর কিছু build কোরো না।</li>
     </ul>
   </div>
 </section>
@@ -230,7 +230,7 @@ footer h3{margin-top:0}
     <h3>16 GB RAM — Entry tier · ছোট মডেলে পুরো pipeline সম্ভব</h3>
     <ul>
       <li><b>Script:</b> Qwen3-8B ⭐ — 5.2 GB download, ~5–6 GB VRAM / 8 GB card (16 GB RAM-এর Mac-এ চলার হিসাব research-এই আছে)। Ideation, title, caption variant-এ যথেষ্ট; script arc 14B থেকে দুর্বল। Mistral 7B (~4–5 GB)-ও চলে</li>
-      <li><b>Voice:</b> Kokoro / Piper CPU-তে, Chatterbox (~2–4 GB VRAM) GPU-তে — voice stage-এ RAM কোনো বাধাই না</li>
+      <li><b>Voice:</b> Kokoro / Piper CPU-তে, Qwen3-TTS 1.7B (~8 GB VRAM) GPU-তে — voice stage-এ RAM কোনো বাধাই না</li>
       <li><b>Image:</b> FLUX.1-schnell GGUF Q4/Q5 (6–8 GB VRAM), SDXL (6–8 GB), Qwen-Image Q2–Q3 GGUF + Lightning LoRA (~8 GB tier)</li>
       <li><b>Video:</b> Wan 2.2 TI2V-5B offload করে চলবে, কিন্তু এর recommended RAM 32 GB — তাই এই tier-এ ধীর / swap হবে। Draft-এর জন্য LTX-Video 0.9.x (~8 GB VRAM) তুলনায় practical</li>
       <li><b>খেয়াল রাখো:</b> একবারে একটা app — LM Studio আর ComfyUI একসঙ্গে খুললেই 16 GB ভরে যাবে; Premiere/AE খোলার আগে একটা বন্ধ করো</li>
@@ -240,7 +240,7 @@ footer h3{margin-top:0}
     <h3>32 GB RAM — Recommended ⭐ · পুরো pipeline-এর practical sweet spot</h3>
     <ul>
       <li><b>Script:</b> Qwen3-14B ⭐ — এই গাইডের #1 pick ঠিক এই হিসাবেই চলে: 12–16 GB VRAM + 32 GB RAM। Gemma 3 12B (12 GB tier)-ও comfortable</li>
-      <li><b>Voice:</b> সবগুলোই — Chatterbox, Kokoro, আর Qwen3-TTS 1.7B (~8 GB VRAM comfortable)-সহ</li>
+      <li><b>Voice:</b> সবগুলোই — Qwen3-TTS 1.7B (~8 GB VRAM comfortable), Kokoro-সহ</li>
       <li><b>Image:</b> Qwen-Image Q4 GGUF (file ~12–13 GB, &lt;12 GB VRAM tier), FLUX GGUF Q5 — storyboard-এর আসল কাজের setup এটাই</li>
       <li><b>Video:</b> Wan 2.2 A14B Q4 GGUF (&lt;12 GB VRAM claimed), HunyuanVideo 1.5 (14 GB VRAM floor, offload), LTX-2.5 int8/distilled path (~12 GB VRAM, unofficial — official minimum 32 GB VRAM / 32 GB RAM, যার RAM অংশটা এই tier পূরণ করে)</li>
       <li><b>Verdict:</b> বেশিরভাগ motion designer-এর জন্য এটাই লক্ষ্য — 5টা stage-র সব #1 pick এক machine-এ চলে, budget-ও নিয়ন্ত্রণে থাকে</li>
@@ -272,7 +272,7 @@ footer h3{margin-top:0}
     <h3>8 GB VRAM — Entry GPU · ছোট / quantized মডেলে কাজ শুরু</h3>
     <ul>
       <li><b>Script:</b> Qwen3-8B ⭐ — 5.2 GB download, ~5–6 GB VRAM-এ আরামে চলে। Qwen3-14B (12–16 GB VRAM) এই tier-এ চলবে না</li>
-      <li><b>Voice: ✅ পুরোপুরি চলে</b> — Kokoro-82M CPU-তেই চলে, Chatterbox মাত্র ~2–4 GB VRAM, Piper CPU-তে। Qwen3-TTS 1.7B (~8 GB VRAM comfortable) একদম borderline / tight হবে। ⚠️ Maya 2 Native (Bengali) এই tier-এ চলবে না — 12 GB VRAM recommended</li>
+      <li><b>Voice: ✅ পুরোপুরি চলে</b> — Kokoro-82M CPU-তেই চলে, Piper CPU-তে। Qwen3-TTS 1.7B (~8 GB VRAM comfortable) একদম borderline / tight হবে। ⚠️ Maya 2 Native (Bengali) এই tier-এ চলবে না — 12 GB VRAM recommended</li>
       <li><b>Image:</b> FLUX.1-schnell GGUF Q4/Q5 (6–8 GB) ⭐, নতুন FLUX 3 Image [klein] int8 (8 GB card, ComfyUI 0.41+) আর SDXL (6–8 GB) — এই tier-এর আসল কাজের setup। Qwen-Image শুধু Q2–Q3 GGUF (~8 GB tier)-এ, quality কমিয়ে</li>
       <li><b>Video:</b> Wan 2.2 TI2V-5B ⭐ — offload দিয়ে ~8 GB VRAM-এ 720p @ 24fps, ~5s clip। Draft-এর জন্য LTX-Video 0.9.x (~8 GB), previz-এর জন্য Wan 2.1 1.3B (8.19 GB) বা CogVideoX-2B INT8 (3.6 GB)</li>
       <li><b>চলবে না:</b> Wan 2.2 A14B FP8, HunyuanVideo 1.5 (14 GB floor), LTX-2.x official (32 GB VRAM minimum), Qwen-Image FP8</li>
@@ -316,7 +316,7 @@ footer h3{margin-top:0}
 <!-- ============ RUNNERS ============ -->
 <section id="runners">
   <div class="sec-head"><span class="sec-num">SETUP</span><h2>আগে এই ৩টা Runner ইন্সটল করো</h2></div>
-  <p class="sec-sub">মডেলগুলো সরাসরি চলে না — runner লাগে। Non-coder designer হিসেবে সবচেয়ে সহজ পথ: Pinokio দিয়ে ComfyUI ইন্সটল, LM Studio দিয়ে LLM। <b>Current versions (5 Nov 2026):</b> ComfyUI 0.42.0 (Oct 2026 — FLUX 3 klein-এর জন্য 0.41+ বাধ্যতামূলক), Ollama 0.40.x, LM Studio 0.4.28। Recommendation অপরিবর্তিত।</p>
+  <p class="sec-sub">মডেলগুলো সরাসরি চলে না — runner লাগে। Non-coder designer হিসেবে সবচেয়ে সহজ পথ: Pinokio দিয়ে ComfyUI ইন্সটল, LM Studio দিয়ে LLM। <b>Current versions (12 Nov 2026):</b> ComfyUI 0.44.0 (4 Nov 2026 — MiniMax-H3 support আর ProRes video encoding যোগ হয়েছে; FLUX 3 klein-এর জন্য 0.41+ বাধ্যতামূলক), Ollama 0.40.17 (10 Nov 2026), LM Studio 0.4.28। Recommendation অপরিবর্তিত।</p>
   <div class="grid c3">
     <div class="card">
       <h3>Pinokio — সেরা installer</h3>
@@ -327,12 +327,12 @@ footer h3{margin-top:0}
     <div class="card">
       <h3>LM Studio — LLM-এর জন্য (GUI)</h3>
       <p>Model browser + chat, terminal লাগে না। July 2025 থেকে commercial use-এর জন্যও free (app নিজে closed-source)। Minimum recommendation: 16 GB RAM / 4 GB VRAM। Current version: <b>LM Studio 0.4.28</b>।</p>
-      <p><b>Ollama</b> (current <b>0.40.x</b>) হলো বিকল্প — CLI + desktop app, <span class="cmd">ollama run qwen3:14b</span> এক command-এই মডেল চলে, OpenAI-compatible local API-ও দেয়। দুটোই ভেতরে llama.cpp/GGUF — hardware physics একই।</p>
+      <p><b>Ollama</b> (current <b>0.40.17</b>, 10 Nov 2026) হলো বিকল্প — CLI + desktop app, <span class="cmd">ollama run qwen3:14b</span> এক command-এই মডেল চলে, OpenAI-compatible local API-ও দেয়। দুটোই ভেতরে llama.cpp/GGUF — hardware physics একই।</p>
       <p class="src">Source: storagereview.com, guidetoartificialintelligence.com</p>
     </div>
     <div class="card">
       <h3>ComfyUI — Image + Video-র একমাত্র runner</h3>
-      <p>Node-based, free/open-source। Image আর video মডেলের জন্য এটাই standard — Ollama/LM Studio-তে diffusion মডেল চলে না, ওটা আলাদা জগৎ। Manual Python/CUDA setup এড়াতে <b>Pinokio দিয়ে ইন্সটল করো</b>। Current version: <b>0.42.0</b> (Oct 2026) — নতুন FLUX 3 Image [klein] চালাতে <b>0.41 বা তার বেশি</b> লাগবেই।</p>
+      <p>Node-based, free/open-source। Image আর video মডেলের জন্য এটাই standard — Ollama/LM Studio-তে diffusion মডেল চলে না, ওটা আলাদা জগৎ। Manual Python/CUDA setup এড়াতে <b>Pinokio দিয়ে ইন্সটল করো</b>। Current version: <b>0.44.0</b> (4 Nov 2026 — MiniMax-H3 support আর ProRes video encoding যোগ হয়েছে) — নতুন FLUX 3 Image [klein] চালাতে <b>0.41 বা তার বেশি</b> লাগবেই।</p>
       <p>Storyboard frame (Stage 3) আর সেই frame animate করা (Stage 4) — দুটোই এখানে হবে।</p>
     </div>
   </div>
@@ -426,13 +426,14 @@ footer h3{margin-top:0}
       </tr>
     </tbody>
   </table>
+  <p>👁️ <b>Cloud watch (local pick না):</b> <b>Qwen4-Max Preview</b> (11 Nov 2026) — শুধু Alibaba Token Plan-এ hosted, preview শেষ 25 Nov 2026; open weights, benchmark বা per-token price এখনো published না। একটা slide-এ 27B open-weights tier দেখানো হয়েছে — নজরে রাখো, preview-র ওপর কিছু build কোরো না।</p>
   <p class="src">Sources: spheron.network, dexity.com, intelligibberish.com, induwara.lk, promptquorum.com</p>
 </section>
 
 <!-- ============ STAGE 2 ============ -->
 <section id="stage2">
   <div class="sec-head"><span class="sec-num">STAGE 2</span><h2>Voice Generation / TTS — Local Models</h2></div>
-  <div class="okbox"><b>🆕 Headline বদলে গেছে (5 Nov 2026):</b> <strong>Maya 2 Native হলো প্রথম serious local Bengali TTS candidate</strong> — Apache 2.0, Bengali সহ 12 language, voice cloning সহ। পুরনো "ভালো local Bengali TTS নেই" কথাটা আর সত্যি না। <b>তবে সাবধান:</b> final client VO-তে ব্যবহারের আগে <b>আসল Bangla script-এ নিজে test করো</b> — finals-এর quality এখনো hands-on verified না, আর model card-এ বলা নেই এর Bengali <b>bn-BD নাকি bn-IN</b> dialect। Plan: <b>English VO = local (Chatterbox)</b>, <b>Bangla VO = Maya 2 Native test করে, না হলে cloud/human</b>, Bangla timing/draft = Piper (CPU fallback)।</div>
+  <div class="okbox"><b>🆕 Headline বদলে গেছে (12 Nov 2026):</b> <strong>Chatterbox RETIRED ⛔</strong> — Resemble AI 4 Nov 2026-এ README-তে official notice দিয়েছে: <em>"As of August 2026, Chatterbox is retired research and is no longer maintained."</em> Code MIT licence-এ archive হিসেবে public থাকবে, কিন্তু support, update বা paid tier কিছুই নেই — তাই English client-VO cloning-এর <strong>#1 pick এখন Qwen3-TTS 1.7B</strong> (Apache 2.0, actively maintained, 3-second voice cloning, ~8 GB VRAM, CUDA-only)। <strong>Maya 2 Native</strong> (Oct 2026, Apache 2.0) এখনো <strong>প্রথম serious local Bengali TTS candidate</strong>। <b>তবে সাবধান:</b> final client VO-তে ব্যবহারের আগে <b>আসল Bangla script-এ নিজে test করো</b> — finals-এর quality এখনো hands-on verified না, আর model card-এ বলা নেই এর Bengali <b>bn-BD নাকি bn-IN</b> dialect। Plan: <b>English final VO = Qwen3-TTS</b>, <b>Bangla VO = Maya 2 Native test করে, না হলে cloud/human</b>, Bangla timing/draft = Piper (CPU fallback)।</div>
 
   <div class="pick">
     <div class="pick-main">
@@ -451,15 +452,16 @@ footer h3{margin-top:0}
 
   <div class="pick">
     <div class="pick-main">
-      <span class="pick-tag">#1 Pick — English Client VO</span>
-      <h3>Chatterbox Multilingual V3 <span style="font-size:15px;color:var(--ink3)">· Resemble AI · Pinokio 1-click</span></h3>
-      <p>Zero-shot voice cloning মাত্র ~5–10 second sample থেকে, exaggeration/emotion control, Turbo-তে <span class="cmd">[laugh]</span> <span class="cmd">[cough]</span>-এর মতো paralinguistic tag। Resemble-এর blind test-এ ~63–65% listener ElevenLabs-এর চেয়ে এটাকে prefer করেছে। Output-এ Perth watermark থাকে। ⚠️ এর PyTorch 2.6 pin-এ RTX 50-series (Blackwell) kernel নেই — Blackwell owner হলে torch upgrade বা CPU fallback লাগবে।</p>
+      <span class="pick-tag">#1 Pick — English Client VO · 🆕 12 Nov 2026</span>
+      <h3>Qwen3-TTS 1.7B <span style="font-size:15px;color:var(--ink3)">· Alibaba Qwen · actively maintained</span></h3>
+      <p>Chatterbox retire হওয়ার পর English client-VO cloning-এর নতুন #1 pick। মাত্র <b>3-second reference audio</b> থেকে zero-shot voice cloning (Base variant), CustomVoice-এ 9টা preset speaker + plain-language style instruction, আর VoiceDesign-এ text description থেকে নতুন voice বানানো যায়। ⚠️ <b>CUDA-only</b> — official CPU/Apple Silicon path নেই। Bengali নেই, Hindi-ও নেই — এটা শুধু English VO-র pick; Bangla-র জন্য Maya 2 Native (উপরে)।</p>
     </div>
     <div class="pick-side"><dl>
-      <dt>Licence</dt><dd>MIT <span class="badge b-ok">✅ Commercial OK</span></dd>
-      <dt>Hardware</dt><dd>~2–4 GB VRAM (Turbo 350M: ~2–2.9 GB)</dd>
-      <dt>Languages</dt><dd>23 — Hindi, Arabic, Chinese, Spanish… <span class="badge b-no">❌ Bengali নেই</span></dd>
-      <dt>Install</dt><dd><span class="cmd">pip install chatterbox-tts</span></dd>
+      <dt>Licence</dt><dd>Apache 2.0 <span class="badge b-ok">✅ Fully commercial</span></dd>
+      <dt>Hardware</dt><dd>3.9 GB weights · ~8 GB VRAM comfortable · CUDA-only</dd>
+      <dt>Languages</dt><dd>10 — ZH, EN, JP, KR, DE, FR, RU, PT, ES, IT · <span class="badge b-no">❌ Bengali নেই</span></dd>
+      <dt>Cloning</dt><dd>✅ 3-second zero-shot cloning</dd>
+      <dt>Replaces</dt><dd>Chatterbox Multilingual V3 — ⛔ RETIRED 4 Nov 2026 (নিচে table-এ)</dd>
     </dl></div>
   </div>
 
@@ -481,18 +483,18 @@ footer h3{margin-top:0}
         <td data-l="Cloning">❌ Cloning নেই; 54টা preset voice, emotion সীমিত</td>
       </tr>
       <tr>
-        <td class="name">Chatterbox Multilingual V3 ⭐<small>0.5B · best cloning pick</small></td>
-        <td data-l="Licence">MIT <span class="badge b-ok">✅ Yes</span> (output watermarked)</td>
+        <td class="name">Chatterbox Multilingual V3 ⛔<small>0.5B · RETIRED — আগের cloning pick</small></td>
+        <td data-l="Licence">MIT <span class="badge b-ok">✅ Yes</span> (output watermarked) — ⛔ <b>RETIRED 4 Nov 2026 — unmaintained archive; MIT licence unchanged, still works, but no fixes coming; use only if already installed, pin the code</b> (<span class="cmd" style="white-space:normal;word-break:break-all">pip install git+https://github.com/resemble-ai/chatterbox.git@5de7a54</span>)</td>
         <td data-l="Hardware">~2–4 GB VRAM; CPU fallback ধীর</td>
         <td data-l="Languages">23 (Hindi সহ) — <span class="badge b-no">❌ Bengali নেই</span> (repo থেকে verbatim verify করা)</td>
-        <td data-l="Cloning">✅ ~5–10 s থেকে zero-shot cloning + emotion control</td>
+        <td data-l="Cloning">✅ ~5–10 s থেকে zero-shot cloning + emotion control — তবে নতুন setup-এ Qwen3-TTS 1.7B-ই pick</td>
       </tr>
       <tr>
-        <td class="name">Qwen3-TTS 1.7B ⭐<small>সবচেয়ে নতুন (22 Jan 2026) · watch list</small></td>
+        <td class="name">Qwen3-TTS 1.7B ⭐<small>নতুন #1 English VO pick (22 Jan 2026) · Chatterbox-কে replace করল</small></td>
         <td data-l="Licence">Apache 2.0 (models + tokenizer) <span class="badge b-ok">✅ Yes</span></td>
         <td data-l="Hardware">3.9 GB weights, ~8 GB VRAM comfortable (0.6B: 1.8 GB) — <b>CUDA-only</b>, official CPU/Apple Silicon path নেই</td>
         <td data-l="Languages">10: ZH, EN, JP, KR, DE, FR, RU, PT, ES, IT — <span class="badge b-no">❌ Bengali নেই, Hindi-ও নেই</span></td>
-        <td data-l="Cloning">✅ মাত্র <b>3-second cloning</b> (Base); CustomVoice-এ 9 preset speaker + plain-language style instruction; VoiceDesign-এ text description থেকে voice</td>
+        <td data-l="Cloning">✅ মাত্র <b>3-second cloning</b> (Base); CustomVoice-এ 9 preset speaker + plain-language style instruction; VoiceDesign-এ text description থেকে voice — Chatterbox retire হওয়ার পর এটাই English final VO-র #1 pick</td>
       </tr>
       <tr>
         <td class="name">Piper<small>এখন শুধু CPU fallback — timing/draft</small></td>
@@ -524,10 +526,24 @@ footer h3{margin-top:0}
       </tr>
       <tr>
         <td class="name">Fish Speech / S1 / S2<small>open weights</small></td>
-        <td data-l="Licence"><b>CC-BY-NC-SA-4.0</b> <span class="badge b-no">❌ NON-commercial</span> — commercial মানে paid Fish Audio API / আলাদা licence (এক source-এ ~$10k/mo tier reported)</td>
+        <td data-l="Licence"><b>CC-BY-NC-SA-4.0</b> <span class="badge b-no">❌ NON-commercial</span> — S1/S2 open weights non-commercial-ই থাকে; শুধু নতুন <b>Drama 3</b> (নিচের row) conditionally commercial। Commercial মানে paid Fish Audio API / আলাদা licence (এক source-এ ~$10k/mo tier reported)</td>
         <td data-l="Hardware">~4 GB VRAM (0.5B–4B family)</td>
         <td data-l="Languages">Hosted version 80+ langs দাবি করে; open 1.5 = 13 langs — open weights-এ Bengali confirm হয়নি</td>
         <td data-l="Cloning">✅ 10–30 s cloning, খুব expressive — open weights দিয়ে personal only</td>
+      </tr>
+      <tr>
+        <td class="name">Ming-3.0-tts-0.5B 🆕<small>Ant Group inclusionAI · 19–20 Oct 2026</small></td>
+        <td data-l="Licence">MIT <span class="badge b-ok">✅ Commercial use allowed</span></td>
+        <td data-l="Hardware">0.5B — ⚠️ officially শুধু <b>datacenter GPU</b>-তে tested; কোনো GGUF/quantized build নেই, তাই <b>consumer GPU-তে চলবে কিনা unverified — adopt করার আগে নিজে test করো</b></td>
+        <td data-l="Languages">7: Chinese, English, German, Spanish, French, Korean, Japanese + 2টা Chinese dialect — <span class="badge b-no">❌ Bengali নেই</span> · 44.1 kHz audio</td>
+        <td data-l="Cloning">✅ Voice cloning + voice design + expressive tags — Artificial Analysis <b>Controlled Voice leaderboard-এ open-weight #1</b> (1069 Elo)</td>
+      </tr>
+      <tr>
+        <td class="name">Fish Audio Drama 3 🆕<small>Fish Audio · 13 Oct 2026 · open weights</small></td>
+        <td data-l="Licence"><b>Fish Audio Community License v1.0</b> <span class="badge b-warn">⚠️ Conditional</span> — free commercial use <b>শুধু US$500,000 annual revenue-র নিচে</b> (licensee + affiliates); hosted TTS/cloning service চালাতে আলাদা licence লাগবে</td>
+        <td data-l="Hardware">35B MoE (~3B active per token) — VRAM published না, <b>check the model card</b></td>
+        <td data-l="Languages">83 languages</td>
+        <td data-l="Cloning">✅ Bracketed stage-direction control — actor-এর মতো delivery direct করা যায় · Artificial Analysis <b>provider-voice leaderboard-এ open-weight #1</b> (1275 Elo)</td>
       </tr>
     </tbody>
   </table>
@@ -751,7 +767,7 @@ footer h3{margin-top:0}
   <div class="flow">
     <div class="step"><div class="step-dot">1</div><div class="step-body"><b>Setup — Pinokio</b><p>Pinokio ইন্সটল করে তার ভেতর থেকে <b>LM Studio</b> আর <b>ComfyUI</b> বসাও। বাকি সব এর পর।</p></div></div>
     <div class="step"><div class="step-dot">2</div><div class="step-body"><b>Idea + Script — LM Studio · Qwen3-14B</b><p>Hook, story, 60s script (~130–160 words), shot list। Temperature 0.9–1.1-তে creative draft। 24 GB card থাকলে step-up: <b>Qwen3.8-27B</b>।</p></div></div>
-    <div class="step"><div class="step-dot">3</div><div class="step-body"><b>Voice — Chatterbox / Maya 2 Native / Kokoro / Piper</b><p>English final VO: <b>Chatterbox</b> (নিজের voice clone সহ)। Scratch/timing: <b>Kokoro</b>। Bangla: <b>Maya 2 Native</b> — প্রথম serious local candidate, তবে final-এর আগে আসল script-এ test করো; timing draft-এর CPU fallback <b>Piper bn_BD</b>, না হলে cloud/human (নিচে Cloud Fallback দেখো)।</p></div></div>
+    <div class="step"><div class="step-dot">3</div><div class="step-body"><b>Voice — Qwen3-TTS / Maya 2 Native / Kokoro / Piper</b><p>English final VO: <b>Qwen3-TTS 1.7B</b> (3-second voice clone সহ; Chatterbox retire হয়েছে — 4 Nov 2026)। Scratch/timing: <b>Kokoro</b>। Bangla: <b>Maya 2 Native</b> — প্রথম serious local candidate, তবে final-এর আগে আসল script-এ test করো; timing draft-এর CPU fallback <b>Piper bn_BD</b>, না হলে cloud/human (নিচে Cloud Fallback দেখো)।</p></div></div>
     <div class="step"><div class="step-dot">4</div><div class="step-body"><b>Storyboard — ComfyUI · Qwen-Image-Edit + FLUX 3 klein</b><p>Text/product frame-এ Qwen-Image, photoreal frame-এ <b>FLUX 3 Image [klein]</b> (Kommunity licence-র US$5M cap মাথায় রেখে; fully Apache fallback FLUX.1-schnell), fast photoreal-এ Z-Image Turbo। Consistency: LoRA + ControlNet + IP-Adapter + fixed seed। Board ও client comments: <b>Figma</b>। বাংলা type এখানেই আসল text layer হিসেবে বসবে।</p></div></div>
     <div class="step"><div class="step-dot">5</div><div class="step-body"><b>Animate — ComfyUI · Wan 2.2 I2V</b><p>Storyboard frame গুলোই first frame — 5s করে hero insert, product move, background generate করো। Speed লাগলে LTX।</p></div></div>
     <div class="step"><div class="step-dot">6</div><div class="step-body"><b>Finish — Premiere + After Effects</b><p>Assemble, titles, Bangla type, grade, sound mix। Timeline-এর gap-এ Adobe-র in-timeline generative tool — শুধু দরকার হলে। Social cut-down একই Figma/ComfyUI asset থেকে।</p></div></div>
@@ -764,12 +780,13 @@ footer h3{margin-top:0}
   <div class="sec-head"><span class="sec-num">⚠️</span><h2>Licence Traps — এই ৪টা মুখস্থ রাখো</h2></div>
   <p class="sec-sub">Licence গুলো এই research-এর summary — legal advice না। তুমি যে exact checkpoint download করবে, তার model card নিজে পড়ো; এই market-এর #1 trap-ই হলো code licence ≠ weights licence।</p>
   <div class="trap"><b>Trap 1 — FLUX.1 [dev] ≠ FLUX.1 [schnell].</b> Dev = non-commercial weights (কিছু reading-এ output commercial usable হলেও, BFL licence ছাড়া paid pipeline dev-এর ওপর বানিও না — public price নেই)। Schnell = Apache 2.0, fully commercial। Client work-এ schnell/SDXL-ই safe।</div>
-  <div class="trap"><b>Trap 2 — XTTS-v2, F5-TTS, Fish Speech-এর open weights = NON-commercial।</b> Quality যতই ভালো হোক, paid client work-এ legally ব্যবহার করা যাবে না। আর Coqui মৃত — XTTS-এর licence কেনার উপায়ও নেই।</div>
-  <div class="trap"><b>Trap 3 — "Community licence" ≠ Apache।</b> Llama, Gemma 3, HunyuanVideo, LTX-2.x, CogVideoX-5B সবই শর্ত সাপেক্ষে commercial use দেয় (user cap / revenue cap / territory exclusion)। Bangladesh-এর solo designer হিসেবে তুমি fine — তবু clause টা পড়ে নাও। একই কথা নতুনগুলোতেও: <b>FLUX 3 Image [klein]</b>-এর Kommunity License = commercial use শুধু <b>US$5M annual revenue-র নিচে</b>; <b>Kitten TTS 2</b>-র Stellon Labs Community License-ও Apache 2.0 না।</div>
+  <div class="trap"><b>Trap 2 — XTTS-v2, F5-TTS, Fish Speech (S1/S2)-এর open weights = NON-commercial।</b> Quality যতই ভালো হোক, paid client work-এ legally ব্যবহার করা যাবে না। আর Coqui মৃত — XTTS-এর licence কেনার উপায়ও নেই।</div>
+  <div class="trap"><b>Trap 3 — "Community licence" ≠ Apache।</b> Llama, Gemma 3, HunyuanVideo, LTX-2.x, CogVideoX-5B সবই শর্ত সাপেক্ষে commercial use দেয় (user cap / revenue cap / territory exclusion)। Bangladesh-এর solo designer হিসেবে তুমি fine — তবু clause টা পড়ে নাও। একই কথা নতুনগুলোতেও: <b>FLUX 3 Image [klein]</b>-এর Kommunity License = commercial use শুধু <b>US$5M annual revenue-র নিচে</b>; <b>Kitten TTS 2</b>-র Stellon Labs Community License-ও Apache 2.0 না। আর নতুন <b>Fish Audio Drama 3</b>-র Community License v1.0 = free commercial use শুধু <b>US$500k annual revenue-র নিচে</b> (hosted TTS/cloning service-এর জন্য আলাদা licence)।</div>
   <div class="trap"><b>Trap 4 (নতুন) — Qwen-Image-2.1 আর FLUX.2-র বড় ভার্সন = NON-commercial।</b> <b>Qwen-Image-2.1</b> (Sep 2026) ও এর Turbo checkpoint Qwen Research License-এ — <b>client work-এ কখনো না</b>; commercial-safe Qwen-Image line এখনো 20B মডেলটাই, বর্তমান update <b>Qwen-Image-2512</b> (Dec 2025, Apache 2.0)। তেমনি <b>FLUX.2 [klein] 9B</b> আর <b>FLUX.2 [dev] 32B</b> non-commercial — FLUX.2 family-তে শুধু <b>4B klein</b>-টাই Apache 2.0।</div>
 
   <h3>⛔ Dead / Changed / Worsened (2025–26)</h3>
   <ul class="tight">
+    <li><b>Chatterbox — RETIRED (notice 4 Nov 2026):</b> Resemble AI README-তে official notice — <em>"As of August 2026, Chatterbox is retired research and is no longer maintained."</em> খেয়াল করো: এটা <b>maintenance change, licence change না</b> — MIT licence আগের মতোই থাকে, code archive হিসেবে public; কিন্তু support/update/paid tier নেই, আর Resemble AI এখন voice AI-এর বদলে deepfake-detection বানায়।</li>
     <li><b>Play.ht / PlayAI — DEAD:</b> Meta team acqui-hire করেছে (July 2025); service 31 Dec 2025-এ shut down, clone গুলো deleted, migration নেই।</li>
     <li><b>Sora — DEAD:</b> app বন্ধ 26 Apr 2026, API shut 24 Sep 2026, কোনো replacement নেই।</li>
     <li><b>Coqui (XTTS) — company dead Jan 2024 থেকে:</b> licence কেনা যায় না, project abandonware।</li>
@@ -840,7 +857,7 @@ footer h3{margin-top:0}
     <li>Cloud video / Adobe: <a href="https://writingmate.ai/blog/best-ai-video-generator-runway-kling-luma-veo-2026">writingmate.ai</a> · <a href="https://www.dreamdrive.ai/learn/cross-platform/ai-video-cost-which-platform-for-what/">dreamdrive.ai</a> · <a href="https://www.provideocoalition.com/adobes-ibc-release-for-premiere-and-after-effects/">provideocoalition.com</a></li>
     <li>Social: <a href="https://quasa.io/stories/canva-pro-vs-adobe-express-a-24-gap-hides-two-different-ai-limits">quasa.io</a> · <a href="https://theplainmanual.com/canva-vs-adobe-express/">theplainmanual.com</a></li>
   </ul>
-  <p class="small">Research window: late 2025 – Nov 2026 · <b>সর্বশেষ আপডেট: 5 November 2026</b> (Weekly update #1)। সব price/spec official বা reputable 2025–26 page থেকে নেওয়া index read — hands-on test না। Licence গুলো summary মাত্র, legal advice না: download করার আগে প্রতিটা checkpoint-এর নিজের model card পড়ো।</p>
+  <p class="small">Research window: late 2025 – Nov 2026 · <b>সর্বশেষ আপডেট: 12 November 2026</b> (Weekly update #2)। সব price/spec official বা reputable 2025–26 page থেকে নেওয়া index read — hands-on test না। Licence গুলো summary মাত্র, legal advice না: download করার আগে প্রতিটা checkpoint-এর নিজের model card পড়ো।</p>
 </footer>
 
 </div>
